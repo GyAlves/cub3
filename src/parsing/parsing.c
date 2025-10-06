@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 19:01:01 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/06 19:40:13 by galves-a         ###   ########.fr       */
+/*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
+/*   Updated: 2025/10/06 19:39:15 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bola_quadrada.h"
-
-int main(int argc, char **argv)
+int parse_file(void)
 {
-    t_game game;
-    
-    // jucoelho
-    if (parse_file(argv[1], &game) != 0)
-        return (error_exit());
-    
-    // galves
-    if (init_engine(&game) != 0)
-        return (error_exit());
-    
-    // game_loop(&game);
-    
-    // // Limpeza
-    // cleanup_engine(&game);
-    // free_game_data(&game);
-    
     return (0);
 }
