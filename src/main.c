@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:01:01 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/06 19:40:13 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:43:00 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ int main(int argc, char **argv)
     if (init_engine(&game) != 0)
         return (error_exit());
     
-    // game_loop(&game);
+    // galves
+    game_loop(&game);
     
-    // // Limpeza
-    // cleanup_engine(&game);
-    // free_game_data(&game);
+    // galves
+    cleanup_engine(&game);
+
+    // ??
+    free_game_data(&game);
     
     return (0);
 }
