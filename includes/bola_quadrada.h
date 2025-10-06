@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/06 19:35:25 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:05:12 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_map {
     int     height;
     int     floor_color;    // cor do chão (RGB)
     int     ceiling_color;  // cor do teto (RGB)
-    int     player_x;       // posição inicial
+    int     player_x;       // posição inicialDay 0 — agree scene contract & get one sample scene file from parser.
     int     player_y;
     char    player_dir;     // N, S, E, W
 }   t_map;
