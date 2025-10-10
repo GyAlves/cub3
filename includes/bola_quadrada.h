@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/10 17:36:50 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/10 17:40:03 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,4 @@ typedef struct s_game {
     t_texture   textures[4];  // N, S, E, W
 }   t_game;
 
-#endif
+#endif  
