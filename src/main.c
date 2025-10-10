@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*	                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -14,24 +14,29 @@
 
 int main(int argc, char **argv)
 {
-    t_game game;
-    
-    // jucoelho
-    if (parse_file(argv[1], &game) != 0)
-        return (error_exit());
-    
-    // galves
-    if (init_engine(&game) != 0)
-        return (error_exit());
-    
-    // galves
-    game_loop(&game);
-    
-    // galves
-    cleanup_engine(&game);
+	t_game	game;
 
-    // ??
-    free_game_data(&game);
-    
-    return (0);
+	if (argc != 2)
+	{
+		ft_printf("Error:\nInvalid number of arguments.\n");
+		return (0);
+	}
+	// jucoelho
+	if (ft_parse_file(argv[1], &game) != 0)
+		return (error_exit());
+
+	// galves
+	if (init_engine(&game) != 0)
+		return (error_exit());
+
+	// galves
+	game_loop(&game);
+
+	// galves
+	cleanup_engine(&game);
+
+	// ??
+	free_game_data(&game);
+
+	return (0);
 }

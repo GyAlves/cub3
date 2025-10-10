@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   bola_quadrada.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/06 20:05:12 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:58:21 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BOLA_QUADRADA_H
 # define BOLA_QUADRADA_H
+
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdint.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <math.h>
+# include "../mlx/mlx.h"
+# include "../libft/libft.h"
 
 // Structs
 typedef struct s_map {
