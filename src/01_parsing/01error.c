@@ -6,11 +6,11 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:50:15 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/08 17:21:37 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:59:26 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
+#include "parsing.h"
 
 int	ft_error(int i)
 {

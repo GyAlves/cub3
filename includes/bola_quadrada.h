@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/10 17:40:03 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/14 16:16:57 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
+# include "parsing.h"
+
 // Structs
 typedef struct s_map {
-    int     **grid;         // mapa 2D
-    int     width;
+    char    **grid;         // mapa 2D
+    int     *width;
     int     height;
     int     floor_color;    // cor do chão (RGB)
     int     ceiling_color;  // cor do teto (RGB)
@@ -56,7 +58,12 @@ typedef struct s_game {
     void        *win;
     t_map       map;
     t_player    player;
-    t_texture   textures[4];  // N, S, E, W
+    t_texture   textures[5];  // N, S, E, W
 }   t_game;
+
+int		main(int argc, char **argv);
+void	ft_debug_map(t_map *map);
+void	ft_debug_textures(t_texture *textures);
+void	ft_free_game(t_game *game);
 
 #endif  
