@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/14 16:16:57 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:44:47 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_game {
     void        *win;
     t_map       map;
     t_player    player;
-    t_texture   textures[5];  // N, S, E, W
+    t_texture   textures[4];  // N, S, E, W
 }   t_game;
 
 int		main(int argc, char **argv);

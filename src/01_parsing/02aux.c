@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/15 19:22:06 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:11:40 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int	ft_mapcontent(t_map *map)
 		while (map->grid[i][j] != '\0')
 		{
 			z = 0;
-			while ((z < 6) && (map->grid[i][j] != possib_char[z]))
+			while ((z < 7) && (map->grid[i][j] != possib_char[z]))
 				z++;
 			if (possib_char[z] == '\0')
-				return (ft_printf
-					("Error: invalid map unrecognized character found\n"), 0);
+			{
+				printf("\033[1;32mError check map->grid[%d][%d] = %s\n", i, j, map->grid[i]);
+				return (ft_printf("Error: invalid map unrecognized character found\n", 0));
+			}
 			j++;
 		}
 		i++;

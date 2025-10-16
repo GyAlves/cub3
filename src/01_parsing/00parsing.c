@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/15 19:25:26 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/16 19:22:39 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_val_elem(t_map *map)
 		return (0);
 	if (!ft_mapwall1(map))
 		return (0);
-	if (!ft_mapwall2(map))
+	if (!ft_map_sidewall(map))
 		return (0);
 	return (1);
 }
@@ -97,6 +97,28 @@ int	ft_parse_file(char *filename, t_game *game)
 		return (0);
 	if (!ft_read_map(&game->map, filename))
 		return (0);
+	int j = 0;
+	int i = 0;
+	if (game->map.grid && game->map.grid[0])
+	{
+		while (i < game->map.height)
+		{
+			printf("\033[94mgame->map.grid[%2d][width %2d] = %s\n", i, game->map.width[i], game->map.grid[i]);
+			i++;
+		}
+	}
+	if (!ft_lexer(game))
+		return (0);
+	j = 0;
+	i = 0;
+	if (game->map.grid && game->map.grid[0])
+	{
+		while (i < game->map.height)
+		{
+			printf("\033[90mgame->map.grid[%2d][width %2d] = %s\n", i, game->map.width[i], game->map.grid[i]);
+			i++;
+		}
+	}
 	if (!ft_val_elem(&game->map))
 		return (0);
 	return (1);

@@ -114,6 +114,7 @@ int	main(int argc, char **argv)
 		printf("Texture %c\n", tex[i]);
 		ft_debug_textures(&game.textures[i]);
 	}
+	printf("\033[1;32mValid map!\033[0m\n");
 	ft_free_game(&game);
 	return (0);
 }
