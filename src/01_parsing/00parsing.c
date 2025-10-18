@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/16 19:22:39 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/17 23:24:16 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int	ft_parse_file(char *filename, t_game *game)
 			i++;
 		}
 	}
+	if(!ft_verifytexcolor(game))
+		return (0);
 	if (!ft_val_elem(&game->map))
 		return (0);
 	return (1);

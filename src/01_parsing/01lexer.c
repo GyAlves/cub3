@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 20:19:23 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/16 19:25:17 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/17 23:49:27 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,24 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 
 	z = 0;
 	str = ft_strtrim(map->grid[i] + 1, " ");
+	printf("DEBUG: str = [%s]\n", str);
 	if (!str)
 		return (0);
-	if (!(color = ft_split(str, ',')))
-		return (ft_free_map(color), 0);
+	color = ft_split(str, ',');
+	if (!color)
+		return (free(str), 0);
+	while (color[z])
+		z++;
+	printf("DEBUG: total elementos = %d\n", z); 
+	if (z != 3)
+		return (ft_free_map(color), free(str), 0);
+	z = 0;
 	while (z < 3)
 	{
 		rgb[z] = ft_atoi(color[z]);
+		printf("DEBUG: rgb[%d] = %d\n", z, rgb[z]);
 		if (rgb[z] < 0 || rgb[z] > 255)
-		{
-			ft_free_map(color);
-			return (free(str), 0);
-		}
+			return (ft_free_map(color), free(str), 0);
 		z++;
 	}
 	ft_rgb_to_int(map, rgb, color_type);
@@ -80,6 +86,22 @@ int	ft_valid_token(t_game *game, int i, int j, char token_type)
 		return (ft_valid_colortoken(&game->map, i, 'C'));
 	return (1);
 }
+int	ft_verifytexcolor(t_game *game)
+{
+	int	j;
+	j = 0;
+	while(j < 4)
+	{
+		if (game->textures[j].addr == NULL)
+			return(ft_printf("Error: Map texture incomplete %d\n", j), 0);
+		j++;
+	}
+	j = 0;
+	if (game->map.ceiling_color == -1 || game->map.floor_color == -1)
+		return(ft_printf("Error: Map color incomplete\n"), 0);
+	return (1);
+}
+
 int	ft_lexer(t_game *game)
 {
 	int		i;
@@ -93,7 +115,7 @@ int	ft_lexer(t_game *game)
 	possib_char = "NSWEFC";
 	while (i < game->map.height)
 	{
-		while (game->map.grid[i][j] ==  '\0')
+		while (game->map.grid[i][j] == '\0')
 		{
 			i++;
 		}
@@ -108,6 +130,7 @@ int	ft_lexer(t_game *game)
 				free(game->map.grid[i]);
 				i++;
 				j = 0;
+				z = 0;
 			}
 		}
 		else if(game->map.grid[i][j] ==  '\0')
@@ -136,15 +159,4 @@ int	ft_lexer(t_game *game)
 			return (1);
 		}
 	}
-	j = 0;
-	while(j < 4)
-	{
-		if (game->textures[j].addr == NULL)
-			return(ft_printf("Error: Map texture incomplete\n"), 0);
-		j++;
-	}
-	j = 0;
-	if (game->map.ceiling_color == -1 || game->map.floor_color == -1)
-		return(ft_printf("Error: Map color incomplete\n"), 0);
-	return (1);
 }

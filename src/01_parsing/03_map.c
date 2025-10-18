@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/16 18:34:47 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/17 23:32:29 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 		if (map->width[i - 1] >= j)
 		{
 			if (map->grid[i - 1][j] != ' ' && map->grid[i - 1][j] != '1')
-				return (ft_printf("%s 2) i = %d, j = %d\n", message, i, j), 0);
+				return (ft_printf("message\n"), 0);
 			j++;
 		}
 	}
@@ -107,7 +107,7 @@ int	ft_map_sidewall(t_map *map)
 		while (map->grid[i][j] == ' ')
 			j++;
 		if (map->grid[i][j] != '1' || map->grid[i][map->width[i] - 1] != '1')
-			return (ft_printf("Error: side wall not closed\n"), 0);
+			return (ft_printf("Error: side wall not closed %d, %d\n", i, j), 0);
 		if (!ft_mapemptyspace(map, i, j))
 			return (0);
 		i++;

@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	}
 	ft_init_game(&game);
 	// jucoelho
-	if (ft_parse_file(argv[1], &game) != 1)
+	if (!ft_parse_file(argv[1], &game))
 	{
 		ft_free_game(&game);
 		return (1);
