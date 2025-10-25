@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 20:19:23 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/17 23:49:27 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/24 19:47:51 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 
 	z = 0;
 	str = ft_strtrim(map->grid[i] + 1, " ");
-	printf("DEBUG: str = [%s]\n", str);
 	if (!str)
 		return (0);
 	color = ft_split(str, ',');
@@ -40,14 +39,12 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 		return (free(str), 0);
 	while (color[z])
 		z++;
-	printf("DEBUG: total elementos = %d\n", z); 
 	if (z != 3)
 		return (ft_free_map(color), free(str), 0);
 	z = 0;
 	while (z < 3)
 	{
 		rgb[z] = ft_atoi(color[z]);
-		printf("DEBUG: rgb[%d] = %d\n", z, rgb[z]);
 		if (rgb[z] < 0 || rgb[z] > 255)
 			return (ft_free_map(color), free(str), 0);
 		z++;
@@ -64,6 +61,11 @@ int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
 
 	j += 3;
 	len = ft_strlen(game->map.grid[i]);
+	if (game->textures[tex_type].addr != NULL)
+	{
+		printf("Error: Map with repeated texture");
+		return (0);
+	}
 	game->textures[tex_type].addr = ft_substr(game->map.grid[i], j, len);
 	if (!game->textures[tex_type].addr)
 		return (0);
@@ -102,61 +104,72 @@ int	ft_verifytexcolor(t_game *game)
 	return (1);
 }
 
-int	ft_lexer(t_game *game)
+int	ft_process_line(t_game *game, int *i, int *j)
 {
-	int		i;
-	int		j;
-	int		z;
-	char	*possib_char;
+	int		z = 0;
+	char	*possib_char = "NSWEFC";
 
-	i = 0;
-	j = 0;
-	z = 0;
-	possib_char = "NSWEFC";
-	while (i < game->map.height)
+	while (game->map.grid[*i][*j] == '\0')
+		(*i)++;
+	if (game->map.grid[*i][*j] == ' ')
 	{
-		while (game->map.grid[i][j] == '\0')
+		(*j)++;
+		return (0);
+	}
+	while (possib_char[z] != '\0' && game->map.grid[*i][*j] != possib_char[z])
+		z++;
+	if (game->map.grid[*i][*j] == possib_char[z])
+	{
+		if (ft_valid_token(game, *i, *j, possib_char[z]))
 		{
-			i++;
-		}
-		if (game->map.grid[i][j] == ' ')
-			j++;
-		while (possib_char[z] != '\0' && game->map.grid[i][j] != possib_char[z])
-			z++;
-		if (game->map.grid[i][j] == possib_char[z])
-		{
-			if (ft_valid_token(game, i, j, possib_char[z]))
-			{
-				free(game->map.grid[i]);
-				i++;
-				j = 0;
-				z = 0;
-			}
-		}
-		else if(game->map.grid[i][j] ==  '\0')
-		{
-			while (game->map.grid[i][j] ==  '\0')
-			{
-				i++;
-			}
-		}
-		else
-		{
-			z = 0;
-			while (i + z < game->map.height)
-			{
-				game->map.grid[z] = game->map.grid[z + i];
-				game->map.width[z] = game->map.width[z + i];
-				z++;
-			}
-			while (z < game->map.height)
-			{
-				game->map.grid[z] = NULL;
-				game->map.width[z] = -1;
-				z++;
-			}
-			game->map.height -= i;
-			return (1);
+			free(game->map.grid[*i]);
+			(*i)++;
+			*j = 0;
+			return (0);
 		}
 	}
+	return (-1);
+}
+
+int	ft_compact_map(t_game *game, int start)
+{
+	int	z = 0;
+
+	while (z + start < game->map.height)
+	{
+		game->map.grid[z] = game->map.grid[z + start];
+		game->map.width[z] = game->map.width[z + start];
+		z++;
+	}
+	while (z < game->map.height)
+	{
+		game->map.grid[z] = NULL;
+		game->map.width[z] = -1;
+		z++;
+	}
+	game->map.height -= start;
+	return (1);
+}
+
+int	ft_lexer(t_game *game)
+{
+	int	i = 0;
+	int	j = 0;
+	int	result = 0;
+
+	while (i < game->map.height)
+	{
+		result = ft_process_line(game, &i, &j);
+		if (result == -1)
+		{
+			if (game->map.grid[i][j] == '\0')
+			{
+				while (game->map.grid[i][j] == '\0')
+					i++;
+			}
+			else
+				return (ft_compact_map(game, i));
+		}
+	}
+	return (0);
 }

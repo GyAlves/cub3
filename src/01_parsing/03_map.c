@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/17 23:32:29 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:23:54 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param map Pointer to the map structure (updated with player data).
  * @return Count of player positions minus one (0 if exactly one player).
  */
-static int	ft_mapposition(t_map *map)
+int	ft_mapposition(t_map *map)
 {
 	int		i;
 	int		z;
@@ -99,6 +99,7 @@ int	ft_map_sidewall(t_map *map)
 {
 	int	i;
 	int	j;
+	int width;
 
 	i = 1;
 	while (i < map->height -1)
@@ -106,8 +107,13 @@ int	ft_map_sidewall(t_map *map)
 		j = 0;
 		while (map->grid[i][j] == ' ')
 			j++;
-		if (map->grid[i][j] != '1' || map->grid[i][map->width[i] - 1] != '1')
+		width = map->width[i] - 1;
+		printf("width = %d\n", width);
+		if (map->grid[i][j] != '1' || map->grid[i][width] != '1')
+		{
+			printf("map->grid[%d][%d] != 1(%c) || map->grid[%d][%d] != 1(%c) \n", i, j, map->grid[i][j], i, width, map->grid[i][width]);
 			return (ft_printf("Error: side wall not closed %d, %d\n", i, j), 0);
+		}
 		if (!ft_mapemptyspace(map, i, j))
 			return (0);
 		i++;
