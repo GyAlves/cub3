@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/24 20:23:54 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:02:17 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_mapposition(t_map *map)
 	i = -1;
 	count = -1;
 	position = "NSEW";
-	while (map->grid[++i] != NULL)
+	while (++i < map->height)
 	{
 		z = -1;
 		while (position[++z] != '\0')
@@ -79,7 +79,7 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 		if (map->width[i - 1] >= j)
 		{
 			if (map->grid[i - 1][j] != ' ' && map->grid[i - 1][j] != '1')
-				return (ft_printf("message\n"), 0);
+				return (ft_printf("%s 1) i = %d, j = %d\n", message, i, j), 0);
 			j++;
 		}
 	}
@@ -108,7 +108,7 @@ int	ft_map_sidewall(t_map *map)
 		while (map->grid[i][j] == ' ')
 			j++;
 		width = map->width[i] - 1;
-		printf("width = %d\n", width);
+		//printf("width = %d\n", width);
 		if (map->grid[i][j] != '1' || map->grid[i][width] != '1')
 		{
 			printf("map->grid[%d][%d] != 1(%c) || map->grid[%d][%d] != 1(%c) \n", i, j, map->grid[i][j], i, width, map->grid[i][width]);

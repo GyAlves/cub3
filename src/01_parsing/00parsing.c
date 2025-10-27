@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/24 21:03:09 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:54:07 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_elimine_space(t_map *map)
 		//printf("j entrou no while map->grid[%d][%d] == %c\n", i, j, map->grid[i][j]);
 		while(j >= 0 && map->grid[i][j] == ' ')
 		{
-			printf("entrou no while cut map->grid[%d][%d] == %d\n", i, j, (int)map->grid[i][j]);
+		//	printf("entrou no while cut map->grid[%d][%d] == %d\n", i, j, (int)map->grid[i][j]);
 			map->grid[i][j] = '\0';
 			j--;
 		}
@@ -139,33 +139,94 @@ int	ft_val_extension(char *filename)
 	return (1);
 }
 
+
+
+int	ft_compact_map2(t_game *game)
+{
+	int	i;
+	int	j;
+	
+	printf("entrou no compact map 2\n\n");
+	i = game->map.height - 1;
+	while (game->map.grid[i] > 0)
+	{
+		if (game->map.grid[i][0] == '\0')
+		{
+			printf("entrou no 1º game->map.grid[%d][0] == vazio \n", i);
+			game->map.grid[i] = NULL;
+			game->map.width[i] = -1;
+			game->map.height -= 1;
+			i++;
+		}
+		else if (game->map.grid[i][0] == ' ')
+		{
+			j = 0;
+			printf("entrou no 2º game->map.grid[%d][0] == vazio\n", i);
+			while (game->map.grid[i][j] == ' ' && j < game->map.width[i])
+			{
+				printf("entrou no WHILE Game->map.grid[%d][%d] == ' ' %c && %d < game->map.width %d\n", i, j, game->map.grid[i][j], j, game->map.width[i]);
+				j++;
+			}
+			if (game->map.grid[i][j] == '\0')
+			{
+				printf("entrou no IF Game->map.grid[%d][%d] == ' ' %c && %d < game->map.width %d\n", i, j, game->map.grid[i][j], j, game->map.width[i]);
+				game->map.grid[i] = NULL;
+				game->map.width[i] = -1;
+				game->map.height -= 1;
+				i++;
+			}
+		}
+		else
+		{
+			printf("entrou no else\n");
+			break;
+		}
+	}
+	return (1);
+}
+
+/*int	ft_compact_map(t_game *game, int start)
+{
+	int	z = 0;
+
+	while (z + start < game->map.height)// 0 +start menor altura do mapa 
+	{
+		game->map.grid[z] = game->map.grid[z + start]; 
+		game->map.width[z] = game->map.width[z + start];
+		z++;
+	}
+	while (z < game->map.height)
+	{
+		game->map.grid[z] = NULL;
+		game->map.width[z] = -1;
+		z++;
+	}
+	game->map.height -= start;
+	return (1);
+}*/
+
 int	ft_parse_file(char *filename, t_game *game)
 {
 	if (!ft_val_extension(filename))
 		return (0);
 	if (!ft_read_map(&game->map, filename))
 		return (0);
+	ft_printf("Após read map\n\n");
+	ft_debug_map(&game->map);
+	for (int i = 0; i < 4; ft_debug_textures(&game->textures[i++]));
 	if (!ft_lexer(game))
 		return (0);
+	ft_printf("Após lexer\n\n");
+	ft_debug_map(&game->map);
+	for (int i = 0; i < 4; ft_debug_textures(&game->textures[i++]));
 	if(!ft_verifytexcolor(game))
 		return (0);
-	ft_debug_map(&game->map);
-	ft_printf("\033[1;45mEntrou no Debug_textures\033[0m\n");
-	for (int i = 0; i < 4; i++)
-	{
-		char	tex[] = {'N', 'S', 'E', 'W'};
-		printf("Texture %c\n", tex[i]);
-		ft_debug_textures(&game->textures[i]);
-	}
 	ft_elimine_space(&game->map);
-	ft_debug_map(&game->map);
-	ft_printf("\033[1;45mEntrou no Debug_textures\033[0m\n");
-	for (int i = 0; i < 4; i++)
-	{
-		char	tex[] = {'N', 'S', 'E', 'W'};
-		printf("Texture %c\n", tex[i]);
-		ft_debug_textures(&game->textures[i]);
-	}
+	//ft_debug_map(&game->map);
+	//ft_debug_textures(&game->textures);
+	//ft_compact_map2(game);
+	//ft_debug_map(&game->map);
+	//ft_debug_textures(&game->textures);
 	if (!ft_val_elem(&game->map))
 		return (0);
 	return (1);
