@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:42:31 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/16 17:17:47 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:50:36 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,40 @@ typedef struct s_player t_player;
 typedef struct s_game t_game;
 
 //00 parsing
-int		ft_val_elem(t_map *map);
-int		ft_read_map(t_map *map, char *filename);
-int		ft_val_extension(char *filename);
 int		ft_parse_file(char *filename, t_game *game);
-int		ft_lexer(t_game *game);
+int		ft_val_extension(char *filename);
+int		ft_read_map(t_map *map, char *filename);
+void	ft_elimine_space(t_map *map);
+int		ft_val_elem(t_map *map);
 
-//01 error
-int		ft_error(int i);
-int		ft_error_mem(void *ptr);
-int		ft_error_ptrptr(char **ptr);
-char	**ft_free_map(char **ptr);
+//01 lexer
+int		ft_lexer(t_game *game);
+int		ft_process_line(t_game *game, int *i, int *j);
+int		ft_compact_map(t_game *game, int start);
 
 //02 aux
+
 int		ft_mapcontent(t_map *map);
 int		ft_count_map_lines(t_map *map, char *filename);
 
 //03 map
+int		ft_mapposition(t_map *map);
 int		ft_map_sidewall(t_map *map);
 int		ft_mapwall1(t_map *map);
+
+//04 elements
+int		ft_valid_token(t_game *game, int i, int j, char token_type);
+int		ft_valid_textoken(t_game *game, int i, int j, int tex_type);
+int		ft_valid_colortoken(t_map *map, int i, char color_type);
+int		ft_rgb_to_int(t_map *map, int *rgb, char color_type);
+int	ft_verifytexcolor(t_game *game);
+
+//05 read map
+
+//06 error
+char	**ft_free_map(char **ptr);
+int	ft_error_ptrptr(char **ptr);
+int	ft_error_mem(void *ptr);
+int	ft_error(int i);
 
 #endif

@@ -86,7 +86,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_init_game(&game);
-	// jucoelho
 	if (!ft_parse_file(argv[1], &game))
 	{
 		/*ft_debug_map(&game.map);
@@ -110,9 +109,6 @@ int	main(int argc, char **argv)
 
 	// galves
 	cleanup_engine(&game);
-
-	// ??
-	free_game_data(&game);
 */
 	ft_debug_map(&game.map);
 	ft_printf("\033[1;45mEntrou no Debug_textures\033[0m\n");
