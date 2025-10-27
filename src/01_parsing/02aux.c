@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/27 15:49:30 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:23:53 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	ft_count_map_lines(t_map *map, char *filename)
 	char	*line;
 	int		count;
 
+	
 	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (!ft_error(fd))
