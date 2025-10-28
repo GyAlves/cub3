@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:42:31 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/27 19:50:36 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:39:46 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ typedef struct s_game t_game;
 int		ft_parse_file(char *filename, t_game *game);
 int		ft_val_extension(char *filename);
 int		ft_read_map(t_map *map, char *filename);
-void	ft_elimine_space(t_map *map);
 int		ft_val_elem(t_map *map);
 
 //01 lexer
 int		ft_lexer(t_game *game);
-int		ft_process_line(t_game *game, int *i, int *j);
 int		ft_compact_map(t_game *game, int start);
+int		ft_process_line(t_game *game, int *i, int *j);
 
 //02 aux
-
+void	ft_elimine_space(t_map *map);
+void	ft_trim_trailing_spaces(t_map *map);
 int		ft_mapcontent(t_map *map);
 int		ft_count_map_lines(t_map *map, char *filename);
 

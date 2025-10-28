@@ -6,12 +6,19 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 20:19:23 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/27 19:49:05 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:46:17 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/**
+ * @brief Processes a single line to validate and parse map tokens.
+ * @param game Pointer to the game structure.
+ * @param i Pointer to the current line index.
+ * @param j Pointer to the current column index.
+ * @return 0 if a valid token is found and processed, 1 otherwise.
+ */
 int	ft_process_line(t_game *game, int *i, int *j)
 {
 	int		z;
@@ -24,10 +31,7 @@ int	ft_process_line(t_game *game, int *i, int *j)
 	while (*j < game->map.width[*i] && game->map.grid[*i][*j] == ' ')
 		(*j)++;
 	if (*j >= game->map.width[*i])
-	{
-		*i = game->map.height;
-		return (ft_printf("Error: Unexpected content between elements; only empty lines are allowed.\n"), 0);
-	}
+		return (*i = game->map.height, ft_printf("Error: Unexpected content between elements; only empty lines are allowed.\n"), 0);
 	while (possib_char[z] != '\0' && game->map.grid[*i][*j] != possib_char[z])
 		z++;
 	if (game->map.grid[*i][*j] == possib_char[z])
@@ -42,6 +46,12 @@ int	ft_process_line(t_game *game, int *i, int *j)
 	return (1);
 }
 
+/**
+ * @brief Compacts the map by removing processed configuration lines.
+ * @param game Pointer to the game structure.
+ * @param start Index from which to start compacting the map.
+ * @return 1 on success.
+ */
 int	ft_compact_map(t_game *game, int start)
 {
 	int	z;

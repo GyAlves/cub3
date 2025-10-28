@@ -6,12 +6,17 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/24 16:49:06 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:52:38 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BOLA_QUADRADA_H
 # define BOLA_QUADRADA_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+#  define TILE_SIZE 64
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>

@@ -6,12 +6,17 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:06:48 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/27 19:47:23 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:44:03 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/**
+ * @brief Verifies if all textures and colors are properly loaded.
+ * @param game Pointer to the game structure.
+ * @return 1 if all textures and colors are valid, 0 otherwise.
+ */
 int	ft_verifytexcolor(t_game *game)
 {
 	int	j;
@@ -28,6 +33,13 @@ int	ft_verifytexcolor(t_game *game)
 	return (1);
 }
 
+/**
+ * @brief Converts RGB values to a single integer and assigns to floor or ceiling.
+ * @param map Pointer to the map structure.
+ * @param rgb Array containing the RGB values [0-255].
+ * @param color_type Character indicating color type ('F' for floor, 'C' for ceiling).
+ * @return 1 if successful, 0 if color is duplicated or invalid.
+ */
 int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 {
 	if (color_type == 'F')
@@ -53,6 +65,13 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 	return (0);
 }
 
+/**
+ * @brief Validates and parses a color token from the map configuration.
+ * @param map Pointer to the map structure.
+ * @param i Line index in the map grid.
+ * @param color_type Character indicating color type ('F' or 'C').
+ * @return 1 if the color token is valid, 0 otherwise.
+ */
 int	ft_valid_colortoken(t_map *map, int i, char color_type)
 {
 	char	*str;
@@ -71,20 +90,25 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 		z++;
 	if (z != 3)
 		return (ft_free_map(color), free(str), 0);
-	z = 0;
-	while (z < 3)
+	z = -1;
+	while (++z < 3)
 	{
 		rgb[z] = ft_atoi(color[z]);
 		if (rgb[z] < 0 || rgb[z] > 255)
 			return (ft_free_map(color), free(str), 0);
-		z++;
 	}
 	ft_rgb_to_int(map, rgb, color_type);
-	free(str);
-	ft_free_map(color);
-	return (1);
+	return (free(str), ft_free_map(color), 1);
 }
 
+/**
+ * @brief Validates and stores a texture token from the map configuration.
+ * @param game Pointer to the game structure.
+ * @param i Line index in the map grid.
+ * @param j Column index in the map grid.
+ * @param tex_type Texture type index (0=NO, 1=SO, 2=WE, 3=EA).
+ * @return 1 if the texture token is valid, 0 otherwise.
+ */
 int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
 {
 	int		len;
@@ -104,6 +128,14 @@ int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
 	return (1);
 }
 
+/**
+ * @brief Validates a token type and calls the appropriate validation function.
+ * @param game Pointer to the game structure.
+ * @param i Line index in the map grid.
+ * @param j Column index in the map grid.
+ * @param token_type Character representing the token type (N, S, W, E, F, C).
+ * @return 1 if the token is valid, 0 otherwise.
+ */
 int	ft_valid_token(t_game *game, int i, int j, char token_type)
 {
 	if (game->map.grid[i][j] == 'N' && game->map.grid[i][j + 1] == 'O')

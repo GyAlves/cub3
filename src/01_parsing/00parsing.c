@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/27 19:40:50 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:44:58 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,48 +37,12 @@ int	ft_val_elem(t_map *map)
 	return (1);
 }
 
-void	ft_elimine_space(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = map->height - 1;
-	j = 0;
-	if (i >= 0)
-	{
-		while (map->grid[i][j] == ' ')
-			j++;
-		if (map->grid[i][j] == '\0')
-		{
-			free(map->grid[i]);
-			map->grid[i] = NULL;
-			map->height -= 1;
-			i++;
-		}
-		else
-			j = 0;
-	}
-	i = 0;
-	while (i < map->height)
-	{
-		j = (map->width[i]) - 1;
-		while(j >= 0 && map->grid[i][j] == ' ')
-		{
-			map->grid[i][j] = '\0';
-			j--;
-		}
-		map->width[i] = j + 1;
-		i++;
-	}
-}
 
 /**
- * @brief Lê o mapa de um arquivo e armazena em map->grid.
- * 
- * @param map Ponteiro para a struct t_map onde o mapa será armazenado.
- * @param filename Caminho do arquivo que contém o mapa.
- * 
- * @return int Retorna 1 em sucesso, 0 em caso de erro.
+ * @brief Reads the map from a file and stores it in map->grid.
+ * @param map Pointer to the t_map structure where the map will be stored.
+ * @param filename Path to the file containing the map.
+ * @return 1 on success, 0 on error.
  */
 int	ft_read_map(t_map *map, char *filename)
 {

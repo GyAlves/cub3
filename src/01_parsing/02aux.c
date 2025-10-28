@@ -6,11 +6,59 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/27 19:23:53 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/28 12:37:21 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+/**
+ * @brief Removes the last line of the map if it contains only spaces.
+ * @param map Pointer to the map structure.
+ */
+void	ft_elimine_space(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = map->height - 1;
+	j = 0;
+	if (i >= 0)
+	{
+		while (map->grid[i][j] == ' ')
+			j++;
+		if (map->grid[i][j] == '\0')
+		{
+			free(map->grid[i]);
+			map->grid[i] = NULL;
+			map->height -= 1;
+		}
+	}
+	ft_trim_trailing_spaces(map);
+}
+
+/**
+ * @brief Removes trailing spaces from each line of the map.
+ * @param map Pointer to the map structure.
+ */
+void	ft_trim_trailing_spaces(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = (map->width[i]) - 1;
+		while (j >= 0 && map->grid[i][j] == ' ')
+		{
+			map->grid[i][j] = '\0';
+			j--;
+		}
+		map->width[i] = j + 1;
+		i++;
+	}
+}
 
 /**
  * @brief Validates map grid contains only 
