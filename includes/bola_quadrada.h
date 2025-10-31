@@ -6,17 +6,18 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/28 12:52:38 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 19:58:31 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BOLA_QUADRADA_H
 # define BOLA_QUADRADA_H
 
-# ifndef BUFFER_SIZE
+//# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
-#  define TILE_SIZE 64
-# endif
+#  define WIDTH_SIZE 1400
+#  define HIGHT_SIZE 800
+//# endif
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -33,43 +34,44 @@
 // Structs
 
 typedef struct s_map {
-    char    **grid;         // mapa 2D
-    int     *width;
-    int     height;
-    int     floor_color;    // cor do chão (RGB)
-    int     ceiling_color;  // cor do teto (RGB)
-    int     player_x;       // posição inicial
-    int     player_y;
-    char    player_dir;     // N, S, E, W
-}   t_map;
+	char		**grid;	 // mapa 2D
+	int			*width;
+	int			height;
+	int			floor_color;	// cor do chão (RGB)
+	int			ceiling_color;  // cor do teto (RGB)
+	int			player_x;	   // posição inicial
+	int			player_y;
+	char		player_dir;	 // N, S, E, W
+}	t_map;
 
 typedef struct s_texture {
-    void    *img;
-    char    *addr;
-    int     width;
-    int     height;
-}   t_texture;
+	void		*img;
+	char		*addr;
+	char		*data;
+	int			width;
+	int			height;
+}	t_texture;
 
 typedef struct s_player {
-    double  pos_x;
-    double  pos_y;
-    double  dir_x;      // vetor direção
-    double  dir_y;
-    double  plane_x;    // plano da câmera
-    double  plane_y;
-}   t_player;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;		// vetor direção
+	double		dir_y;
+	double		plane_x;	// plano da câmera
+	double		plane_y;
+}	t_player;
 
 typedef struct s_game {
-    void        *mlx;
-    void        *win;
-    t_map       map;
-    t_player    player;
-    t_texture   textures[4];  // N, S, E, W
-}   t_game;
+	void		*mlx;
+	void		*win;
+	t_map		map;
+	t_player	player;
+	t_texture	textures[4];  // N, S, E, W
+}	t_game;
 
 int		main(int argc, char **argv);
 void	ft_debug_map(t_map *map);
 void	ft_debug_textures(t_texture *textures);
 void	ft_free_game(t_game *game);
 
-#endif  
+#endif

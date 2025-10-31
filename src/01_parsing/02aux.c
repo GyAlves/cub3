@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/28 12:37:21 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:35:52 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_mapcontent(t_map *map)
 			while ((z < 7) && (map->grid[i][j] != possib_char[z]))
 				z++;
 			if (possib_char[z] == '\0')
-				return (ft_printf("Error: invalid map unrecognized character found map->grid[%d][%d] = %c\n", i, j, map->grid[i][j]), 0);
+				return (ft_printf("Error: unrecognized character found\n"), 0);
 			j++;
 		}
 		i++;
@@ -108,7 +108,6 @@ int	ft_count_map_lines(t_map *map, char *filename)
 	char	*line;
 	int		count;
 
-	
 	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (!ft_error(fd))
@@ -129,4 +128,3 @@ int	ft_count_map_lines(t_map *map, char *filename)
 	map->height = count;
 	return (1);
 }
-

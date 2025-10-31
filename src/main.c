@@ -20,6 +20,7 @@ static void	ft_init_texture(t_texture *textures)
 {
 	textures->img = NULL;
 	textures->addr = NULL;
+	textures->data = NULL;
 	textures->width = -1;
 	textures->height = -1;
 }
@@ -88,14 +89,6 @@ int	main(int argc, char **argv)
 	ft_init_game(&game);
 	if (!ft_parse_file(argv[1], &game))
 	{
-		/*ft_debug_map(&game.map);
-		ft_printf("\033[1;45mEntrou no Debug_textures\033[0m\n");
-		for (int i = 0; i < 4; i++)
-		{
-			char	tex[] = {'N', 'S', 'E', 'W'};
-			printf("Texture %c\n", tex[i]);
-			ft_debug_textures(&game.textures[i]);
-		}*/
 		ft_free_game(&game);
 		return (1);
 	}
@@ -111,7 +104,7 @@ int	main(int argc, char **argv)
 	cleanup_engine(&game);
 */
 	ft_debug_map(&game.map);
-	ft_printf("\033[1;45mEntrou no Debug_textures\033[0m\n");
+	ft_printf("\033[1;40mEntrou no Debug_textures\033[0m\n");
 	for (int i = 0; i < 4; i++)
 	{
 		char	tex[] = {'N', 'S', 'E', 'W'};

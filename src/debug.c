@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:57:29 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/16 15:25:06 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:39:06 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ void	ft_debug_map(t_map *map)
 void	ft_debug_textures(t_texture *textures)
 {
 	if (textures->img != NULL)
-		ft_printf("\033[35mimg = %s\033[0m\n", textures->img);
+		ft_printf("\033[32mimg = %s\033[0m\n", textures->img);
 	if (textures->addr != NULL)
-		ft_printf("\033[35maddr = %s\033[0m\n", textures->addr);
+		ft_printf("\033[33maddr = %s\033[0m\n", textures->addr);
+	if (textures->data != NULL)
+		ft_printf("\033[33mdata = %s\033[0m\n", textures->data);
 	if (textures->width != -1)
-		ft_printf("\033[35maddr = %d\033[0m\n", textures->width);
+		ft_printf("\033[33mwidth = %d\033[0m\n", textures->width);
 	if (textures->height != -1)
-		ft_printf("\033[35maddr = %d\033[0m\n", textures->height);
+		ft_printf("\033[33mheight = %d\033[0m\n", textures->height);
 }

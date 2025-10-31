@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/28 12:44:58 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:31:25 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_val_elem(t_map *map)
 		return (ft_printf("Error: %d players in the map\n", player + 1), 0);
 	return (1);
 }
-
 
 /**
  * @brief Reads the map from a file and stores it in map->grid.
@@ -98,24 +97,30 @@ int	ft_val_extension(char *filename)
 	return (1);
 }
 
+/**
+ * @brief Parses and validates the .cub configuration file.
+ * @param filename Path to the .cub file.
+ * @param game Pointer to the game structure.
+ * @return 1 if parsing is successful, 0 on error.
+ * 
+ * Validates file extension, reads the map, parses configuration tokens,
+ * verifies textures and colors, removes unnecessary spaces, validates
+ * map elements and boundaries, and initializes the game window.
+ */
 int	ft_parse_file(char *filename, t_game *game)
 {
 	if (!ft_val_extension(filename))
 		return (0);
 	if (!ft_read_map(&game->map, filename))
 		return (0);
-	//ft_printf("Após read map\n\n");
-	//ft_debug_map(&game->map);
-	//for (int i = 0; i < 4; ft_debug_textures(&game->textures[i++]));
 	if (!ft_lexer(game))
 		return (0);
-	//ft_printf("Após lexer\n\n");
-	//ft_debug_map(&game->map);
-	//for (int i = 0; i < 4; ft_debug_textures(&game->textures[i++]));
-	if(!ft_verifytexcolor(game))
+	if (!ft_verifytexcolor(game))
 		return (0);
 	ft_elimine_space(&game->map);
 	if (!ft_val_elem(&game->map))
+		return (0);
+	if (!ft_new_window(game))
 		return (0);
 	return (1);
 }

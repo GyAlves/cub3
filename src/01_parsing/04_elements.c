@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:06:48 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/28 12:44:03 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:41:28 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,27 @@
 int	ft_verifytexcolor(t_game *game)
 {
 	int	j;
+
 	j = 0;
-	while(j < 4)
+	while (j < 4)
 	{
 		if (game->textures[j].addr == NULL)
-			return(ft_printf("Error: Map texture incomplete %d\n", j), 0);
+			return (ft_printf("Error: Map texture incomplete %d\n", j), 0);
 		j++;
 	}
 	j = 0;
 	if (game->map.ceiling_color == -1 || game->map.floor_color == -1)
-		return(ft_printf("Error: Map color incomplete\n"), 0);
+		return (ft_printf("Error: Map color incomplete\n"), 0);
 	return (1);
 }
 
 /**
- * @brief Converts RGB values to a single integer and assigns to floor or ceiling.
+ * @brief Converts RGB values to a single 
+ * integer and assigns to floor or ceiling.
  * @param map Pointer to the map structure.
  * @param rgb Array containing the RGB values [0-255].
- * @param color_type Character indicating color type ('F' for floor, 'C' for ceiling).
+ * @param color_type Character indicating 
+ * color type ('F' for floor, 'C' for ceiling).
  * @return 1 if successful, 0 if color is duplicated or invalid.
  */
 int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
@@ -49,7 +52,8 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 			printf("Error: Map with repeated floor color");
 			return (0);
 		}
-		return ((map->floor_color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[3]), 1);
+		return ((map->floor_color = (rgb[0] << 16)
+				| (rgb[1] << 8) | rgb[3]), 1);
 	}
 	else if (color_type == 'C')
 	{
@@ -58,9 +62,11 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 			printf("Error: Map with repeated ceiling color");
 			return (0);
 		}
-		return ((map->ceiling_color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[3]), 1);
+		return ((map->ceiling_color = (rgb[0] << 16)
+				| (rgb[1] << 8) | rgb[3]), 1);
 	}
-	else if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255 || rgb[3] < 0 || rgb[3] > 255)
+	else if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0
+		|| rgb[1] > 255 || rgb[3] < 0 || rgb[3] > 255)
 		return (0);
 	return (0);
 }
@@ -124,7 +130,6 @@ int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
 	game->textures[tex_type].addr = ft_substr(game->map.grid[i], j, len);
 	if (!game->textures[tex_type].addr)
 		return (0);
-	ft_printf("valid token =%s\n", game->textures[tex_type].addr);
 	return (1);
 }
 

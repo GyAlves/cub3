@@ -42,7 +42,8 @@ $(NAME): $(MLX_LIB) $(LIBFT_DIR)/libft.a $(OBJS)
 	@echo "\033[1;45m✅ Bola Quadrada 🟨 compilada com sucesso!\033[0m"
 
 run: all
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/cat_wall.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/21c-valid_file_map.cub
+
 	$(RM) -r $(OBJ_DIR) 
 	$(MAKE) -C $(LIBFT_DIR) clean
 

@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01error.c                                          :+:      :+:    :+:   */
+/*   06error.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:50:15 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/15 18:59:26 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:11:06 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/**
+ * @brief Checks for error condition and exits if error is found.
+ * @param i Integer value to check (exits if -1).
+ * @return 1 if no error, otherwise exits the program.
+ */
 int	ft_error(int i)
 {
 	if (i == -1)
@@ -22,6 +27,11 @@ int	ft_error(int i)
 	return (1);
 }
 
+/**
+ * @brief Checks if memory allocation succeeded and exits on failure.
+ * @param ptr Pointer to check for NULL.
+ * @return 1 if pointer is valid, otherwise exits the program.
+ */
 int	ft_error_mem(void *ptr)
 {
 	if (ptr == NULL)
@@ -32,6 +42,11 @@ int	ft_error_mem(void *ptr)
 	return (1);
 }
 
+/**
+ * @brief Checks if double pointer allocation succeeded and exits on failure.
+ * @param ptr Double pointer to check for NULL.
+ * @return 1 if pointer is valid, otherwise exits the program.
+ */
 int	ft_error_ptrptr(char **ptr)
 {
 	if (ptr == NULL)
@@ -42,6 +57,11 @@ int	ft_error_ptrptr(char **ptr)
 	return (1);
 }
 
+/**
+ * @brief Frees a NULL-terminated array of strings.
+ * @param ptr Double pointer to the array of strings to free.
+ * @return NULL after freeing all memory.
+ */
 char	**ft_free_map(char **ptr)
 {
 	int	i;

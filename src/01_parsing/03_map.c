@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/27 19:02:17 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:36:24 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 	message = "Error invalid map — empty space inside playable area";
 	while (j < map->width[i])
 	{
-		while(map->grid[i][j] != ' ' && j < map->width[i])
+		while (map->grid[i][j] != ' ' && j < map->width[i])
 			j++;
 		if (j == map->width[i])
 			return (1);
@@ -99,7 +99,7 @@ int	ft_map_sidewall(t_map *map)
 {
 	int	i;
 	int	j;
-	int width;
+	int	width;
 
 	i = 1;
 	while (i < map->height -1)
@@ -108,12 +108,8 @@ int	ft_map_sidewall(t_map *map)
 		while (map->grid[i][j] == ' ')
 			j++;
 		width = map->width[i] - 1;
-		//printf("width = %d\n", width);
 		if (map->grid[i][j] != '1' || map->grid[i][width] != '1')
-		{
-			printf("map->grid[%d][%d] != 1(%c) || map->grid[%d][%d] != 1(%c) \n", i, j, map->grid[i][j], i, width, map->grid[i][width]);
 			return (ft_printf("Error: side wall not closed %d, %d\n", i, j), 0);
-		}
 		if (!ft_mapemptyspace(map, i, j))
 			return (0);
 		i++;
