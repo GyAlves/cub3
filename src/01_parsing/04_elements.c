@@ -53,7 +53,7 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 			return (0);
 		}
 		return ((map->floor_color = (rgb[0] << 16)
-				| (rgb[1] << 8) | rgb[3]), 1);
+				| (rgb[1] << 8) | rgb[2]), 1);
 	}
 	else if (color_type == 'C')
 	{
@@ -63,10 +63,10 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 			return (0);
 		}
 		return ((map->ceiling_color = (rgb[0] << 16)
-				| (rgb[1] << 8) | rgb[3]), 1);
+				| (rgb[1] << 8) | rgb[2]), 1);
 	}
 	else if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0
-		|| rgb[1] > 255 || rgb[3] < 0 || rgb[3] > 255)
+		|| rgb[1] > 255 || rgb[2] < 0 || rgb[2] > 255)
 		return (0);
 	return (0);
 }
