@@ -20,7 +20,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 MLX_DIR = mlx
 MLX_LIB = $(MLX_DIR)/libmlx.a
 MLX_INC = -I$(MLX_DIR)
-MLXFLAGS = $(MLX_INC) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLXFLAGS = $(MLX_INC) -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
@@ -38,7 +38,7 @@ $(LIBFT_DIR)/libft.a:
 
 $(NAME): $(MLX_LIB) $(LIBFT_DIR)/libft.a $(OBJS)
 	@echo "🔗 Ligando $(NAME)..."
-	$(CC) $(CFLAGS) -I$(MLX_DIR) -L$(LIBFT_DIR) -o $(NAME) $(OBJS) -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -L$(LIBFT_DIR) -o $(NAME) $(OBJS) -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -framework OpenGL -framework AppKit
 	@echo "\033[1;45m✅ Bola Quadrada 🟨 compilada com sucesso!\033[0m"
 
 run: all

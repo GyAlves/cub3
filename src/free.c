@@ -96,11 +96,13 @@ void	ft_free_game(t_game *game)
 	if (game->win && game->mlx)
 		mlx_destroy_window(game->mlx, game->win);
 	ft_free_grid(game);
+#ifdef __linux__
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 		game->mlx = NULL;
 	}
+#endif
 	ft_free_tex(game->textures);
 }
