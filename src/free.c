@@ -87,6 +87,8 @@ void	ft_free_game(t_game *game)
 	i = 0;
 	if (!game)
 		return ;
+	if (game->mlx && game->img)
+		mlx_destroy_image(game->mlx, game->img);
 	while (i < 4)
 	{
 		if (game->mlx && game->textures[i].img)

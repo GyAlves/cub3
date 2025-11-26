@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bola_quadrada.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/30 19:58:31 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/11/26 19:33:18 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,14 @@ typedef struct s_player {
 typedef struct s_game {
 	void		*mlx;
 	void		*win;
+	void		*img;
+	char		*img_data;
 	t_map		map;
 	t_player	player;
 	t_texture	textures[4];  // N, S, E, W
+	int			bpp;
+	int			line_len;
+	int			endian;
 }	t_game;
 
 int		main(int argc, char **argv);

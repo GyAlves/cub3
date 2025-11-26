@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "bola_quadrada.h"
+#include "engine.h"
 
 /**
  * Initializes a texture struct.
@@ -92,26 +93,13 @@ int	main(int argc, char **argv)
 		ft_free_game(&game);
 		return (1);
 	}
-/*
-	// galves
 	if (init_engine(&game) != 0)
-		return (error_exit());
-
-	// galves
-	game_loop(&game);
-
-	// galves
-	cleanup_engine(&game);
-*/
-	ft_debug_map(&game.map);
-	ft_printf("\033[1;40mEntrou no Debug_textures\033[0m\n");
-	for (int i = 0; i < 4; i++)
 	{
-		char	tex[] = {'N', 'S', 'E', 'W'};
-		printf("Texture %c\n", tex[i]);
-		ft_debug_textures(&game.textures[i]);
+		ft_printf("Error: Failed to initialize engine.\n");
+		ft_free_game(&game);
+		return (1);
 	}
-	printf("\033[1;32mValid map!\033[0m\n");
+	game_loop(&game);
 	ft_free_game(&game);
 	return (0);
 }

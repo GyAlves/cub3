@@ -124,7 +124,7 @@ int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
 	len = game->map.width[i] - j;
 	if (game->textures[tex_type].addr != NULL)
 	{
-		printf("Error: Map with repeated texture");
+		printf("Error: Map with repeated texture\n");
 		return (0);
 	}
 	game->textures[tex_type].addr = ft_substr(game->map.grid[i], j, len);
