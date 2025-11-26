@@ -18,5 +18,6 @@
 int		init_engine(t_game *game);
 int		render_frame(t_game *game);
 void	game_loop(t_game *game);
+void	init_player(t_game *game);
 
 #endif

@@ -27,5 +27,6 @@ int init_engine(t_game *game)
     game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->line_len, &game->endian);
     if (!game->img_data)
         return (1);
+    init_player(game);
     return (0);
 }
