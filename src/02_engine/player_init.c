@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 20:30:00 by galves-a          #+#    #+#             */
-/*   Updated: 2025/11/26 20:30:00 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/11/26 22:40:24 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/bola_quadrada.h"
+
+static void	set_direction(t_player *p, double dx, double dy, double px, double py)
+{
+	p->dir_x = dx;
+	p->dir_y = dy;
+	p->plane_x = px;
+	p->plane_y = py;
+}
 
 /**
  * Sets the player's direction and camera plane vectors based on orientation
@@ -22,38 +30,18 @@
 static void	set_player_direction(t_player *player, char dir)
 {
 	if (dir == 'N')
-	{
-		player->dir_x = 0;
-		player->dir_y = -1;
-		player->plane_x = 0.66;
-		player->plane_y = 0;
-	}
+		set_direction(player, 0, -1, 0.66, 0);
 	else if (dir == 'S')
-	{
-		player->dir_x = 0;
-		player->dir_y = 1;
-		player->plane_x = -0.66;
-		player->plane_y = 0;
-	}
+		set_direction(player, 0, 1, -0.66, 0);
 	else if (dir == 'E')
-	{
-		player->dir_x = 1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = 0.66;
-	}
+		set_direction(player, 1, 0, 0, 0.66);
 	else if (dir == 'W')
-	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = -0.66;
-	}
+		set_direction(player, -1, 0, 0, -0.66);
 }
 
 /**
  * Initializes the player position and direction from map data
- * Converts grid coordinates to world coordinates (center of tile + 0.5)
+ * Converts grid coordinates to world coordinates
  */
 void	init_player(t_game *game)
 {

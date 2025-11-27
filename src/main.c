@@ -69,6 +69,11 @@ static void	ft_init_game(t_game *game)
 	i = 0;
 	game->mlx = NULL;
 	game->win = NULL;
+	game->img = NULL;
+	game->img_data = NULL;
+	game->bpp = 0;
+	game->line_len = 0;
+	game->endian = 0;
 	ft_init_map(&game->map);
 	ft_init_player(&game->player);
 	while (i < 4)
