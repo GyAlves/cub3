@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/11/26 19:33:18 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/11/26 23:50:47 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,23 @@ typedef struct s_game {
 	int			line_len;
 	int			endian;
 }	t_game;
+
+typedef struct s_ray {
+	double	camera_x;
+	double	ray_direction_x;
+	double	ray_direction_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+} t_ray;
 
 int		main(int argc, char **argv);
 void	ft_debug_map(t_map *map);
