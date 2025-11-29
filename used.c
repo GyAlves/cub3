@@ -1,109 +1,150 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   used.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 19:55:54 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/11/29 20:04:55 by gyasminalve      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "ft_printf.h"
-
-int	ft_print_c(int letter)
+char	*get_next_line(int fd)
 {
-	return (write(1, &letter, 1));
-}
+	static char	*buffer;
+	char		*tmp;
+	char		*line;
+	int			bytes;
 
-int	ft_print_s(char *str)
-{
-	int	count;
-
-	count = 0;
-	if (str == NULL)
-		return (ft_print_s("(null)"));
-	while (*str != '\0')
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	tmp = malloc(BUFFER_SIZE + 1);
+	if (!tmp)
+		return (NULL);
+	bytes = 1;
+	while (!gnl_strchr(buffer, '\n') && bytes > 0)
 	{
-		write(1, str, 1);
-			str++;
-			count++;
-	}	
-	return (count);
-}
-
-int	ft_print_nbr(int n)
-{
-	char	nb;
-	int		count;
-
-	count = 0;
-	if (n == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return (11);
+		bytes = read(fd, tmp, BUFFER_SIZE);
+		if (bytes < 0)
+			return (free(tmp), free(buffer), buffer = NULL, NULL);
+		tmp[bytes] = '\0';
+		buffer = gnl_strjoin(buffer, tmp);
 	}
-	if (n < 0)
+	free(tmp);
+	line = get_line(buffer);
+	buffer = update_buffer(buffer);
+	return (line);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
 	{
-		write(1, "-", 1);
-		n *= -1;
-		count++;
+		return (0);
 	}
-	if (n >= 10)
-		count += ft_print_nbr(n / 10);
-	nb = (n % 10) + '0';
-	count += write(1, &nb, 1);
-	return (count);
+	while (((s1[i] != '\0') && (s2[i] != '\0')) \
+		&& (s1[i] == s2[i] && (i < n - 1)))
+	{
+				i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int	ft_print_unbr(unsigned int n)
+static char	*gnl_strchr(const char *s, int c)
 {
-	char	nb;
-	int		count;
-
-	count = 0;
-	if (n >= 10)
-		count += ft_print_unbr(n / 10);
-	nb = (n % 10) + '0';
-	count += write(1, &nb, 1);
-	return (count);
-}
-int	ft_print_mem(unsigned long nbr)
-{
-	int		count;
-
-	count = 0;
-	if (nbr == 0)
-		return (ft_print_s("(nil)"));
-	write(1, "0x", 2);
-	count += 2;
-	count += ft_print_mem2(nbr);
-	return (count);
+	if (!s)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
-int	ft_print_hex_lower(unsigned int nbr)
+static char	*gnl_strjoin(char *s1, char *s2)
 {
-	char	*hex_chars_lower;
-	int		count;
+	char	*joined;
+	int		i;
+	int		j;
 
-	count = 0;
-	hex_chars_lower = "0123456789abcdef";
-	if (nbr >= 16)
-		count += ft_print_hex_lower(nbr / 16);
-	count += write(1, &hex_chars_lower[nbr % 16], 1);
-	return (count);
+	if (!s1)
+	{
+		s1 = malloc(1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}
+	if (!s2)
+		return (free(s1), NULL);
+	joined = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!joined)
+		return (free(s1), NULL);
+	i = -1;
+	while (s1[++i])
+		joined[i] = s1[i];
+	j = 0;
+	while (s2[j])
+		joined[i++] = s2[j++];
+	joined[i] = '\0';
+	free(s1);
+	return (joined);
 }
 
-int	ft_print_hex_upper(unsigned int nbr)
+int	ft_strlen(const char *s)
 {
-	char	*hex_chars;
-	int		count;
+	size_t	i;
 
-	count = 0;
-	hex_chars = "0123456789ABCDEF";
-	if (nbr >= 16)
-		count += ft_print_hex_upper(nbr / 16);
-	count += write(1, &hex_chars[nbr % 16], 1);
-	return (count);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+
+static char	*get_line(char *buffer)
+{
+	char	*line;
+	int		i;
+
+	if (!buffer || !buffer[0])
+		return (NULL);
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	line = malloc(i + 2);
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
+}
+
+static char	*update_buffer(char *buffer)
+{
+	char	*new_buffer;
+	int		i;
+	int		j;
+
+	if (!buffer)
+		return (NULL);
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
+		return (free(buffer), NULL);
+	new_buffer = malloc(ft_strlen(buffer) - i);
+	if (!new_buffer)
+		return (free(buffer), NULL);
+	i++;
+	j = 0;
+	while (buffer[i])
+		new_buffer[j++] = buffer[i++];
+	new_buffer[j] = '\0';
+	free(buffer);
+	return (new_buffer);
 }
