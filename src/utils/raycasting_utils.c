@@ -15,18 +15,7 @@
 
 void	clear_screen(t_game *game)
 {
-	int	*buffer;
-	int	total_pixels;
-	int	i;
-
-	buffer = (int *)game->img_data;
-	total_pixels = WIDTH_SIZE * HIGHT_SIZE;
-	i = 0;
-	while (i < total_pixels)
-	{
-		buffer[i] = 0x0000FF;
-		i++;
-	}
+	(void)game;
 }
 
 void	init_ray(t_ray *ray, t_player *player, int screen_column)

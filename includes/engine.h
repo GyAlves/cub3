@@ -27,4 +27,13 @@ void	init_ray(t_ray *ray, t_player *player, int screen_column);
 void	setup_ray_step(t_ray *ray, t_player *player);
 void	calculate_perp_distance(t_ray *ray, t_player *player);
 
+/* Drawing utilities */
+int		get_texture_index(t_ray *ray);
+int		calculate_wall_texture_x(t_game *game, t_ray *ray, int tex_index);
+void	init_wall_drawing(t_ray *ray, int *line_height,
+			int *draw_start, int *draw_end);
+void	draw_textured_wall(t_game *game, t_draw_params *params);
+void	draw_ceiling_floor(t_game *game, int screen_column,
+			int draw_start, int draw_end);
+
 #endif

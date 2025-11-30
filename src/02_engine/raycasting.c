@@ -39,36 +39,18 @@ static void	perform_dda(t_ray *ray, t_map *map)
 	}
 }
 
-static void	calculate_wall_height(t_ray *ray, int *draw_start, int *draw_end)
-{
-	int	line_height;
-
-	line_height = (int)(HIGHT_SIZE / ray->perp_wall_dist);
-	*draw_start = -line_height / 2 + HIGHT_SIZE / 2;
-	if (*draw_start < 0)
-		*draw_start = 0;
-	*draw_end = line_height / 2 + HIGHT_SIZE / 2;
-	if (*draw_end >= HIGHT_SIZE)
-		*draw_end = HIGHT_SIZE - 1;
-}
-
 static void	draw_vertical_line(t_game *game, t_ray *ray, int screen_column)
 {
-	int	draw_start;
-	int	draw_end;
-	int	y;
-	int	color;
+	t_draw_params	params;
 
-	calculate_wall_height(ray, &draw_start, &draw_end);
-	y = draw_start;
-	while (y < draw_end)
-	{
-		color = 0xFF0000;
-		if (ray->side == 1)
-			color = 0x990000;
-		put_pixel(game, screen_column, y, color);
-		y++;
-	}
+	init_wall_drawing(ray, &params.line_height,
+		&params.draw_start, &params.draw_end);
+	params.screen_column = screen_column;
+	params.tex_index = get_texture_index(ray);
+	params.tex_x = calculate_wall_texture_x(game, ray, params.tex_index);
+	draw_ceiling_floor(game, screen_column,
+		params.draw_start, params.draw_end);
+	draw_textured_wall(game, &params);
 }
 
 static void	process_ray(t_game *game, int screen_column)
@@ -85,7 +67,14 @@ static void	process_ray(t_game *game, int screen_column)
 void	cast_rays(t_game *game)
 {
 	int	screen_column;
+	static int printed = 0;
 
+	if (!printed)
+	{
+		printf("DEBUG: ceiling_color = 0x%X, floor_color = 0x%X\n",
+			game->map.ceiling_color, game->map.floor_color);
+		printed = 1;
+	}
 	clear_screen(game);
 	screen_column = 0;
 	while (screen_column < WIDTH_SIZE)

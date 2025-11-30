@@ -91,6 +91,15 @@ typedef struct s_ray {
 	int		side;
 } t_ray;
 
+typedef struct s_draw_params {
+	int		screen_column;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		tex_index;
+	int		tex_x;
+}	t_draw_params;
+
 int		main(int argc, char **argv);
 void	ft_debug_map(t_map *map);
 void	ft_debug_textures(t_texture *textures);
