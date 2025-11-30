@@ -41,8 +41,8 @@ int	ft_mapposition(t_map *map)
 			if (ptr)
 			{
 				map->player_dir = position[z];
-				map->player_x = i;
-				map->player_y = ptr - map->grid[i];
+				map->player_x = ptr - map->grid[i];
+				map->player_y = i;
 				count++;
 			}
 		}

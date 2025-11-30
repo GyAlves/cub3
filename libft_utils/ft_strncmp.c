@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frame.c                                     :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 19:50:44 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/26 22:56:52 by gyasminalve      ###   ########.fr       */
+/*   Created: 2025/11/29 00:00:00 by gyasminalve       #+#    #+#             */
+/*   Updated: 2025/11/29 00:00:00 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/bola_quadrada.h"
-#include "../includes/engine.h"
+#include "libft_utils.h"
 
-int render_frame(t_game *game)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-    cast_rays(game);
-    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-    return (0);
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+	{
+		return (0);
+	}
+	while (((s1[i] != '\0') && (s2[i] != '\0')) \
+		&& (s1[i] == s2[i] && (i < n - 1)))
+	{
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

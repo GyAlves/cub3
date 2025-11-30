@@ -15,8 +15,8 @@
 
 //# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
-#  define WIDTH_SIZE 1400
-#  define HIGHT_SIZE 800
+#  define WIDTH_SIZE 800
+#  define HIGHT_SIZE 600
 //# endif
 
 # include <stdlib.h>
@@ -27,7 +27,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "../mlx/mlx.h"
-# include "../libft/libft.h"
+# include "libft_utils.h"
 
 # include "parsing.h"
 

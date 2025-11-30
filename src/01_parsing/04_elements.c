@@ -49,7 +49,7 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 	{
 		if (map->floor_color != -1)
 		{
-			printf("Error: Map with repeated floor color");
+			printf("Error: Map with repeated floor color\n");
 			return (0);
 		}
 		return ((map->floor_color = (rgb[0] << 16)
@@ -59,7 +59,7 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 	{
 		if (map->ceiling_color != -1)
 		{
-			printf("Error: Map with repeated ceiling color");
+			printf("Error: Map with repeated ceiling color\n");
 			return (0);
 		}
 		return ((map->ceiling_color = (rgb[0] << 16)
