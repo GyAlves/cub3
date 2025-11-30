@@ -12,6 +12,7 @@
 
 #include "bola_quadrada.h"
 #include "engine.h"
+#include "utils.h"
 
 /**
  * Initializes a texture struct.
@@ -104,6 +105,7 @@ int	main(int argc, char **argv)
 		ft_free_game(&game);
 		return (1);
 	}
+	setup_signal_handlers(&game);
 	game_loop(&game);
 	ft_free_game(&game);
 	return (0);

@@ -33,6 +33,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 // File reading
 char	*get_next_line(int fd);
+void	gnl_cleanup(void);
 
 // Conversion functions
 int		ft_atoi(const char *str);

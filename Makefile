@@ -43,6 +43,12 @@ $(NAME): $(MLX_LIB) $(OBJS) $(LIBFT_UTILS_OBJS)
 	@echo "\033[1;45m✅ Bola Quadrada 🟨 compilada com sucesso!\033[0m"
 
 run: all
+	./cub3D ./maps/maps_valid/21c-valid_file_map.cub
+
+val: all
+	valgrind --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/21c-valid_file_map.cub
+
+valgrind-full: all
 	valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/21c-valid_file_map.cub
 
 clean:
@@ -53,4 +59,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all run valgrind valgrind-full clean fclean re

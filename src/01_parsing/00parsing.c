@@ -67,6 +67,7 @@ int	ft_read_map(t_map *map, char *filename)
 	}
 	map->grid[i] = NULL;
 	close(fd);
+	gnl_cleanup();
 	return (1);
 }
 

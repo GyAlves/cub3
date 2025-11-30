@@ -120,6 +120,7 @@ int	ft_count_map_lines(t_map *map, char *filename)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	gnl_cleanup();
 	if (count == 0)
 	{
 		ft_printf("Error: map incomplete\n");

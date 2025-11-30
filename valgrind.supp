@@ -1,0 +1,148 @@
+# Valgrind suppression file for MLX and X11 library leaks
+# Usage: valgrind --suppressions=valgrind.supp --leak-check=full ./cub3D <map>
+
+# X11 Display initialization
+{
+   X11_XOpenDisplay
+   Memcheck:Leak
+   ...
+   fun:XOpenDisplay
+}
+
+# X11 Connection
+{
+   X11_XConnectXCB
+   Memcheck:Leak
+   ...
+   fun:_XConnectXCB
+}
+
+# X11 Extensions
+{
+   X11_XInitExtension
+   Memcheck:Leak
+   ...
+   fun:XInitExtension
+}
+
+{
+   X11_XextAddDisplay
+   Memcheck:Leak
+   ...
+   fun:XextAddDisplay
+}
+
+# X11 Keyboard Extension
+{
+   X11_XkbUseExtension
+   Memcheck:Leak
+   ...
+   fun:XkbUseExtension
+}
+
+# X11 Graphics Context
+{
+   X11_XCreateGC
+   Memcheck:Leak
+   ...
+   fun:XCreateGC
+}
+
+# X11 Atom Cache
+{
+   X11_XInternAtom
+   Memcheck:Leak
+   ...
+   fun:XInternAtom
+}
+
+# X11 Shared Memory
+{
+   X11_XShmQueryVersion
+   Memcheck:Leak
+   ...
+   fun:XShmQueryVersion
+}
+
+{
+   X11_XShmCreateImage
+   Memcheck:Leak
+   ...
+   fun:XShmCreateImage
+}
+
+# XCB (X11 C Bindings)
+{
+   XCB_Connect
+   Memcheck:Leak
+   ...
+   fun:xcb_connect_to_fd
+}
+
+{
+   XCB_Extension
+   Memcheck:Leak
+   ...
+   fun:xcb_get_extension_data
+}
+
+# MLX Library
+{
+   MLX_Init
+   Memcheck:Leak
+   ...
+   fun:mlx_init
+}
+
+{
+   MLX_New_Window
+   Memcheck:Leak
+   ...
+   fun:mlx_new_window
+}
+
+{
+   MLX_New_Image
+   Memcheck:Leak
+   ...
+   fun:mlx_new_image
+}
+
+{
+   MLX_XPM_File
+   Memcheck:Leak
+   ...
+   fun:mlx_xpm_file_to_image
+}
+
+# X11 Thread initialization (happens at library load)
+{
+   X11_XInitThreads
+   Memcheck:Leak
+   ...
+   fun:XInitThreads
+}
+
+# X11 Events and Polling
+{
+   X11_XReadEvents
+   Memcheck:Leak
+   ...
+   fun:_XReadEvents
+}
+
+{
+   X11_XWindowEvent
+   Memcheck:Leak
+   ...
+   fun:XWindowEvent
+}
+
+# X11 Uninitialised values (common in X11)
+{
+   X11_Uninit_writev
+   Memcheck:Param
+   writev(vector[0])
+   ...
+   fun:writev
+}

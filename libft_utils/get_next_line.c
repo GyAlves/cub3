@@ -114,7 +114,14 @@ char	*get_next_line(int fd)
 	int			bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		if (fd == -42 && buffer)
+		{
+			free(buffer);
+			buffer = NULL;
+		}
 		return (NULL);
+	}
 	tmp = malloc(BUFFER_SIZE + 1);
 	if (!tmp)
 		return (NULL);
@@ -131,4 +138,9 @@ char	*get_next_line(int fd)
 	line = get_line(buffer);
 	buffer = update_buffer(buffer);
 	return (line);
+}
+
+void	gnl_cleanup(void)
+{
+	get_next_line(-42);
 }
