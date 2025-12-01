@@ -1,7 +1,7 @@
-NO ./images/wall.xpm
-SO ./images/ender64.xpm
-WE ./images/blue.xpm
-EA ./images/white.xpm
+NO ./assets/no_tex.xpm
+SO ./assets/so_tex.xpm
+WE ./assets/we_tex.xpm
+EA ./assets/ea_tex.xpm
 
               C 238,245,255
 F 210,227,200

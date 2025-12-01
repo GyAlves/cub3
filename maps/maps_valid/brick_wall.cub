@@ -1,11 +1,11 @@
 
-NO ./assets/textures/brick_wall.png
-SO ./assets/textures/brick_wall2.png
+NO ./assets/no_tex.xpm
+SO ./assets/so_tex.xpm
 
-EA ./assets/textures/brick_wall4.png
+EA ./assets/ea_tex.xpm
 
 
-WE ./assets/textures/brick_wall3.png
+WE ./assets/we_tex.xpm
 
 F 199, 189, 161
 C 189, 211, 222

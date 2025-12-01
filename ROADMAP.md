@@ -6,9 +6,9 @@
 - [x] Carregamento de texturas (NO, SO, WE, EA)
 - [x] Parsing de cores (Floor e Ceiling)
 - [x] Criação da janela MLX
-- [ ] **Engine de Raycasting**
-- [ ] **Renderização**
-- [ ] **Controles do jogador**
+- [x] **Engine de Raycasting**
+- [x] **Renderização**
+- [x] **Controles do jogador**
 
 ---
 

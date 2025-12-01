@@ -1,18 +1,18 @@
-                                    NO ./images/block.xpm
+NO ./assets/no_tex.xpm
 
-SO ./images/ruins.xpm
-
-
-
-
-
-WE ./images/brickWall.xpm
+SO ./assets/so_tex.xpm
 
 
 
 
 
-EA ./images/wall1.xpm
+WE ./assets/we_tex.xpm
+
+
+
+
+
+EA ./assets/ea_tex.xpm
 
 
 

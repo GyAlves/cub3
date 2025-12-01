@@ -3,10 +3,10 @@ F 210,227,200
 
 
 
-NO ./assets/textures/wood_wall_1.png
-SO ./assets/textures/wood_wall_2.png
-WE ./assets/textures/wood_wall_3.png
-EA ./assets/textures/wood_wall_4.png
+NO ./assets/no_tex.xpm
+SO ./assets/so_tex.xpm
+WE ./assets/we_tex.xpm
+EA ./assets/ea_tex.xpm
 
 
 11111111111111111111

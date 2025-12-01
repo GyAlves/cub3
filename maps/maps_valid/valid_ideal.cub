@@ -1,10 +1,10 @@
-NO ./images/block.xpm
+NO ./assets/no_tex.xpm
 
-SO ./images/ruins.xpm
+SO ./assets/so_tex.xpm
 
-WE ./images/brickWall.xpm
+WE ./assets/we_tex.xpm
 
-EA ./images/wall1.xpm
+EA ./assets/ea_tex.xpm
 
 F 50,10,50
 C 0,0,100

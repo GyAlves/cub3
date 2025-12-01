@@ -1,12 +1,12 @@
-NO ./assets/textures/cat1.png
+NO ./assets/no_tex.xpm
 
 
-SO ./assets/textures/cat2.png
+SO ./assets/so_tex.xpm
 
-WE ./assets/textures/cat3.png
+WE ./assets/we_tex.xpm
 
 
-EA ./assets/textures/cat4.png
+EA ./assets/ea_tex.xpm
 
 
 F 220,100,255

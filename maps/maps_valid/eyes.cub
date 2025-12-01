@@ -1,14 +1,14 @@
 
-NO ./assets/textures/eye_open.png
+NO ./assets/no_tex.xpm
 
 
 
-                                SO ./assets/textures/eye_open.png
+SO ./assets/so_tex.xpm
 
-WE ./assets/textures/eye_closed.png
+WE ./assets/we_tex.xpm
 
 
-                                                             EA ./assets/textures/eye_closed.png
+EA ./assets/ea_tex.xpm
 
 
 

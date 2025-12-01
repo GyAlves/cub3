@@ -12,6 +12,7 @@
 
 #include "../includes/bola_quadrada.h"
 #include "../includes/engine.h"
+#include "../includes/controls.h"
 
 void    game_loop(t_game *game)
 {
@@ -28,5 +29,6 @@ int init_engine(t_game *game)
     if (!game->img_data)
         return (1);
     init_player(game);
+    setup_controls(game);
     return (0);
 }

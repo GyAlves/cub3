@@ -1,7 +1,7 @@
-NO ./assets/textures/cat3.png
-SO ./assets/textures/cat3.png
-WE ./assets/textures/cat4.png
-EA ./assets/textures/cat4.png
+NO ./assets/no_tex.xpm
+SO ./assets/so_tex.xpm
+WE ./assets/we_tex.xpm
+EA ./assets/ea_tex.xpm
 
 C 51,160,255
 F 0, 255,64

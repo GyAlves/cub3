@@ -1,18 +1,18 @@
 
 
-NO ./images/wall.xpm
+NO ./assets/no_tex.xpm
 
 
-SO ./images/ender64.xpm
-WE ./images/blue.xpm
-
-
-
+SO ./assets/so_tex.xpm
+WE ./assets/we_tex.xpm
 
 
 
 
-EA ./images/white.xpm
+
+
+
+EA ./assets/ea_tex.xpm
 
 
 F 100,100,0

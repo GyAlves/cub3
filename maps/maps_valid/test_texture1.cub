@@ -1,10 +1,10 @@
-NO ./path_to_no.xpm
+NO ./assets/no_tex.xpm
 
-SO ./path_to_so......xpm
+SO ./assets/so_tex.xpm
 
-WE ./path_to_we.xpm
+WE ./assets/we_tex.xpm
 
-EA ./path_to_ea......xpm
+EA ./assets/ea_tex.xpm
 
 F 200,200,200
 C 200,200,200

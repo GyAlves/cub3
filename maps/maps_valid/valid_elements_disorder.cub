@@ -1,13 +1,13 @@
-                NO ./images/blockwall.xpm
+NO ./assets/no_tex.xpm
 
 
-WE ./images/brickWall.xpm
+WE ./assets/we_tex.xpm
 
 F 255,255,255
-EA ./images/wall1.xpm
+EA ./assets/ea_tex.xpm
 C 255,255,0
 
-SO ./images/ruins.xpm
+SO ./assets/so_tex.xpm
 
 
 1111111

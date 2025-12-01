@@ -1,7 +1,7 @@
-NO ./assets/textures/eye_open.png
-SO ./assets/textures/forest3.png
-WE ./assets/textures/florest1.png
-EA ./assets/textures/florest2.png
+NO ./assets/no_tex.xpm
+SO ./assets/so_tex.xpm
+WE ./assets/we_tex.xpm
+EA ./assets/ea_tex.xpm
 
 F 31, 33, 32
 C 82, 66, 68

@@ -1,9 +1,9 @@
-WE ./path_to_the_west_texture
+WE ./assets/we_tex.xpm
 C 225,30,0
-EA ./path_to_the_east_texture
+EA ./assets/ea_tex.xpm
 F 220,100,0
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
+NO ./assets/no_tex.xpm
+SO ./assets/so_tex.xpm
 11111
 10001
 10N01
