@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/29 00:00:00 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 20:05:12 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	{
 		return (0);
 	}
-	while (((s1[i] != '\0') && (s2[i] != '\0')) \
+	while (((s1[i] != '\0') && (s2[i] != '\0'))
 		&& (s1[i] == s2[i] && (i < n - 1)))
 	{
 		i++;
