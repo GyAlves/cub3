@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:54:14 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/12/05 19:52:50 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:29:32 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 
 static void	perform_dda(t_ray *ray, t_map *map)
 {
+	int	max_iterations;
+
 	ray->hit = 0;
-	while (ray->hit == 0)
+	max_iterations = 0;
+	while (ray->hit == 0 && max_iterations < 10000)
 	{
+		max_iterations++;
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
@@ -31,10 +35,13 @@ static void	perform_dda(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_x < 0 || ray->map_y < 0 || ray->map_y >= map->height
-			|| ray->map_x >= map->width[ray->map_y])
+		if (ray->map_x < 0 || ray->map_y < 0 || ray->map_y >= map->height)
+			ray->hit = 1;
+		else if (ray->map_x >= map->width[ray->map_y])
 			ray->hit = 1;
 		else if (map->grid[ray->map_y][ray->map_x] == '1')
+			ray->hit = 1;
+		else if (map->grid[ray->map_y][ray->map_x] == ' ')
 			ray->hit = 1;
 	}
 }

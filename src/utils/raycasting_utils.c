@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 20:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/29 20:00:00 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 20:29:32 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ void	init_ray(t_ray *ray, t_player *player, int screen_column)
 	ray->ray_direction_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
-	ray->delta_dist_x = fabs(1 / ray->ray_direction_x);
-	ray->delta_dist_y = fabs(1 / ray->ray_direction_y);
+	if (ray->ray_direction_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->ray_direction_x);
+	if (ray->ray_direction_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->ray_direction_y);
 }
 
 void	setup_ray_step(t_ray *ray, t_player *player)
