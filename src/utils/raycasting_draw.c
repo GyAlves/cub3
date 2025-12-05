@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/30 00:00:00 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 19:44:39 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ void	draw_textured_wall(t_game *game, t_draw_params *params)
 			tex_y += game->textures[params->tex_index].height;
 		tex_pos += step;
 		color = *(int *)(game->textures[params->tex_index].data
-			+ (tex_y * game->textures[params->tex_index].line_len)
-			+ (params->tex_x * (game->textures[params->tex_index].bpp / 8)));
+				+ (tex_y * game->textures[params->tex_index].line_len)
+				+ (params->tex_x
+					* (game->textures[params->tex_index].bpp / 8)));
 		put_pixel(game, params->screen_column, y, color);
 		y++;
 	}

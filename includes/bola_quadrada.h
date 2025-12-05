@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bola_quadrada.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/11/26 23:50:47 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 19:52:50 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,14 @@ typedef struct s_draw_params {
 	int		tex_index;
 	int		tex_x;
 }	t_draw_params;
+
+typedef struct s_dir_params
+{
+	double	dx;
+	double	dy;
+	double	px;
+	double	py;
+}	t_dir_params;
 
 int		main(int argc, char **argv);
 void	ft_debug_map(t_map *map);

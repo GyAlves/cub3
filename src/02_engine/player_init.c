@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 20:30:00 by galves-a          #+#    #+#             */
-/*   Updated: 2025/11/26 22:40:24 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 19:54:00 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/bola_quadrada.h"
 
-static void	set_direction(t_player *p, double dx, double dy, double px, double py)
+static void	set_direction(t_player *p, t_dir_params params)
 {
-	p->dir_x = dx;
-	p->dir_y = dy;
-	p->plane_x = px;
-	p->plane_y = py;
+	p->dir_x = params.dx;
+	p->dir_y = params.dy;
+	p->plane_x = params.px;
+	p->plane_y = params.py;
 }
 
 /**
@@ -30,13 +30,13 @@ static void	set_direction(t_player *p, double dx, double dy, double px, double p
 static void	set_player_direction(t_player *player, char dir)
 {
 	if (dir == 'N')
-		set_direction(player, 0, -1, 0.66, 0);
+		set_direction(player, (t_dir_params){0, -1, 0.66, 0});
 	else if (dir == 'S')
-		set_direction(player, 0, 1, -0.66, 0);
+		set_direction(player, (t_dir_params){0, 1, -0.66, 0});
 	else if (dir == 'E')
-		set_direction(player, 1, 0, 0, 0.66);
+		set_direction(player, (t_dir_params){1, 0, 0, 0.66});
 	else if (dir == 'W')
-		set_direction(player, -1, 0, 0, -0.66);
+		set_direction(player, (t_dir_params){-1, 0, 0, -0.66});
 }
 
 /**

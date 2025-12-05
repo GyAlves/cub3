@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:55:51 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:39:15 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 19:56:14 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ void	ft_free_grid(t_game *game)
 	}
 }
 
+static void	ft_free_mlx(t_game *game)
+{
+	if (!game->mlx)
+		return ;
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	game->mlx = NULL;
+}
+
 /**
  * @brief Frees all allocated resources of the game.
  * @param game Pointer to the game structure.
@@ -98,13 +107,6 @@ void	ft_free_game(t_game *game)
 	if (game->win && game->mlx)
 		mlx_destroy_window(game->mlx, game->win);
 	ft_free_grid(game);
-#ifdef __linux__
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-		game->mlx = NULL;
-	}
-#endif
+	ft_free_mlx(game);
 	ft_free_tex(game->textures);
 }

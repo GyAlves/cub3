@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:54:14 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/27 00:32:02 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 19:52:50 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	process_ray(t_game *game, int screen_column)
 
 void	cast_rays(t_game *game)
 {
-	int	screen_column;
-	static int printed = 0;
+	int			screen_column;
+	static int	printed = 0;
 
 	if (!printed)
 	{

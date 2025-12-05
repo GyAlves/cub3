@@ -12,13 +12,12 @@
 
 #include "../includes/utils.h"
 
-void    put_pixel(t_game *game, int x, int y, int color)
+void	put_pixel(t_game *game, int x, int y, int color)
 {
-    char    *pixel;
+	char	*pixel;
 
-    if ((x < 0 || x >= WIDTH_SIZE) || (y < 0 || y >= HIGHT_SIZE))
-        return;
-    
-    pixel = game->img_data + (y * game->line_len + x * (game->bpp/8));
-    *(int *)pixel = color;
+	if ((x < 0 || x >= WIDTH_SIZE) || (y < 0 || y >= HIGHT_SIZE))
+		return ;
+	pixel = game->img_data + (y * game->line_len + x * (game->bpp / 8));
+	*(int *)pixel = color;
 }
