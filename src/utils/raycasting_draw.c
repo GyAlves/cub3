@@ -68,21 +68,22 @@ void	draw_textured_wall(t_game *game, t_draw_params *params)
 	double	step;
 	double	tex_pos;
 	int		tex_y;
-	int		*texture_data;
 	int		color;
 	int		y;
 
 	step = 1.0 * game->textures[params->tex_index].height / params->line_height;
 	tex_pos = (params->draw_start - HIGHT_SIZE / 2
 			+ params->line_height / 2) * step;
-	texture_data = (int *)game->textures[params->tex_index].data;
 	y = params->draw_start;
 	while (y < params->draw_end)
 	{
-		tex_y = (int)tex_pos & (game->textures[params->tex_index].height - 1);
+		tex_y = (int)tex_pos % game->textures[params->tex_index].height;
+		if (tex_y < 0)
+			tex_y += game->textures[params->tex_index].height;
 		tex_pos += step;
-		color = texture_data[tex_y * game->textures[params->tex_index].width
-			+ params->tex_x];
+		color = *(int *)(game->textures[params->tex_index].data
+			+ (tex_y * game->textures[params->tex_index].line_len)
+			+ (params->tex_x * (game->textures[params->tex_index].bpp / 8)));
 		put_pixel(game, params->screen_column, y, color);
 		y++;
 	}

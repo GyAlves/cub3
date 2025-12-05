@@ -74,9 +74,7 @@ int	ft_render_map(t_game *game)
 int	ft_load_textures(t_game *game)
 {
 	int	i;
-	int	bpp;
 	int	endian;
-	int	size_line;
 
 	i = 0;
 	while (i < 4)
@@ -91,7 +89,8 @@ int	ft_load_textures(t_game *game)
 		if (game->textures[i].width <= 0 || game->textures[i].height <= 0)
 			return (ft_printf("Error: Invalid texture %d dimensions\n", i), 0);
 		game->textures[i].data = mlx_get_data_addr(
-				game->textures[i].img, &bpp, &size_line, &endian);
+				game->textures[i].img, &game->textures[i].bpp,
+				&game->textures[i].line_len, &endian);
 		if (!game->textures[i].data)
 			return (ft_printf("Error getting texture data: %s\n",
 					game->textures[i].addr), 0);

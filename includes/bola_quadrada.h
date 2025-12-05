@@ -50,6 +50,8 @@ typedef struct s_texture {
 	char		*data;
 	int			width;
 	int			height;
+	int			line_len;
+	int			bpp;
 }	t_texture;
 
 typedef struct s_player {
