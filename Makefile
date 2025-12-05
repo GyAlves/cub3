@@ -3,8 +3,8 @@ NAME = cub3D
 
 # Compiler
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft_utils -g
-CFLAGS = -Iincludes -Ilibft_utils -g
+CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft_utils -g
+#CFLAGS = -Iincludes -Ilibft_utils -g
 
 # Directories
 SRC_DIR			= src

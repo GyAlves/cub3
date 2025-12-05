@@ -143,6 +143,7 @@ int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
  */
 int	ft_valid_token(t_game *game, int i, int j, char token_type)
 {
+	(void)token_type;
 	if (game->map.grid[i][j] == 'N' && game->map.grid[i][j + 1] == 'O')
 		return (ft_valid_textoken(game, i, j + 2, 0));
 	if (game->map.grid[i][j] == 'S' && game->map.grid[i][j + 1] == 'O')
