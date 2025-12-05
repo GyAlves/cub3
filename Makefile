@@ -76,7 +76,7 @@ run: all
 	./cub3D ./maps/maps_valid/21c-valid_file_map.cub
 
 val: all
-	valgrind --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/21c-valid_file_map.cub
+	valgrind --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/21b-valid_file_map.cub
 
 valgrind-full: all
 	valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./maps/maps_valid/21c-valid_file_map.cub

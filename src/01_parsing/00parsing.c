@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00parsing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/30 22:31:25 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:49:48 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,28 @@ int	ft_val_elem(t_map *map)
  * @param filename Path to the file containing the map.
  * @return 1 on success, 0 on error.
  */
-int	ft_read_map(t_map *map, char *filename)
+static int	ft_read_grid_lines(t_map *map, int fd)
 {
-	int		fd;
-	int		i;
+	int	i;
 
 	i = 0;
+	map->grid[i] = get_next_line(fd);
+	while (map->grid[i] != NULL)
+	{
+		if (map->grid[i][ft_strlen(map->grid[i]) - 1] == '\n')
+			map->grid[i][ft_strlen(map->grid[i]) - 1] = '\0';
+		map->width[i] = ft_strlen(map->grid[i]);
+		i++;
+		map->grid[i] = get_next_line(fd);
+	}
+	map->grid[i] = NULL;
+	return (1);
+}
+
+int	ft_read_map(t_map *map, char *filename)
+{
+	int	fd;
+
 	if (!ft_count_map_lines(map, filename))
 		return (0);
 	fd = open(filename, O_RDONLY);
@@ -58,14 +74,8 @@ int	ft_read_map(t_map *map, char *filename)
 	map->width = malloc(sizeof(int) * (map->height));
 	if (!ft_error_mem(&map->grid) || !ft_error_mem(&map->width))
 		return (0);
-	while ((map->grid[i] = get_next_line(fd)) != NULL)
-	{
-		if (map->grid[i][ft_strlen(map->grid[i]) - 1] == '\n')
-			map->grid[i][ft_strlen(map->grid[i]) - 1] = '\0';
-		map->width[i] = ft_strlen(map->grid[i]);
-		i++;
-	}
-	map->grid[i] = NULL;
+	if (!ft_read_grid_lines(map, fd))
+		return (0);
 	close(fd);
 	gnl_cleanup();
 	return (1);
