@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:54:14 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/12/05 20:29:32 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:57:15 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ void	cast_rays(t_game *game)
 	static int	printed = 0;
 
 	if (!printed)
-	{
-		printf("DEBUG: ceiling_color = 0x%X, floor_color = 0x%X\n",
-			game->map.ceiling_color, game->map.floor_color);
 		printed = 1;
-	}
 	clear_screen(game);
 	screen_column = 0;
 	while (screen_column < WIDTH_SIZE)
