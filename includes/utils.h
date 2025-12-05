@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 19:34:09 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/26 19:41:55 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 20:10:32 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "bola_quadrada.h"
 
-// Functions
-void    put_pixel(t_game *game, int x, int y, int color);
+void	put_pixel(t_game *game, int x, int y, int color);
 
 // Signal handling
 void	setup_signal_handlers(t_game *game);

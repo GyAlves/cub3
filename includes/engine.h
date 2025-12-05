@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 19:55:09 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/26 22:56:03 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 20:10:33 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_H
 # define ENGINE_H
 
-#include "bola_quadrada.h"
+# include "bola_quadrada.h"
 
 int		init_engine(t_game *game);
 int		render_frame(t_game *game);

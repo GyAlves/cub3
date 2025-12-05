@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/12/05 20:06:25 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:16:45 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,21 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		if (fd == -42 && buffer)
+		{
+			free(buffer);
+			buffer = NULL;
+		}
 		return (NULL);
+	}
 	buffer = read_and_join(buffer, fd);
 	line = get_line(buffer);
 	buffer = update_buffer(buffer);
 	return (line);
+}
+
+void	gnl_cleanup(void)
+{
+	get_next_line(-42);
 }

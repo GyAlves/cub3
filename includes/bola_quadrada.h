@@ -6,18 +6,16 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/12/05 19:52:50 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:10:31 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BOLA_QUADRADA_H
 # define BOLA_QUADRADA_H
 
-//# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-#  define WIDTH_SIZE 800
-#  define HIGHT_SIZE 600
-//# endif
+# define BUFFER_SIZE 100
+# define WIDTH_SIZE 800
+# define HIGHT_SIZE 600
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -31,20 +29,20 @@
 
 # include "parsing.h"
 
-// Structs
-
-typedef struct s_map {
-	char		**grid;	 // mapa 2D
+typedef struct s_map
+{
+	char		**grid;
 	int			*width;
 	int			height;
-	int			floor_color;	// cor do chão (RGB)
-	int			ceiling_color;  // cor do teto (RGB)
-	int			player_x;	   // posição inicial
+	int			floor_color;
+	int			ceiling_color;
+	int			player_x;
 	int			player_y;
-	char		player_dir;	 // N, S, E, W
+	char		player_dir;
 }	t_map;
 
-typedef struct s_texture {
+typedef struct s_texture
+{
 	void		*img;
 	char		*addr;
 	char		*data;
@@ -54,29 +52,32 @@ typedef struct s_texture {
 	int			bpp;
 }	t_texture;
 
-typedef struct s_player {
+typedef struct s_player
+{
 	double		pos_x;
 	double		pos_y;
-	double		dir_x;		// vetor direção
+	double		dir_x;
 	double		dir_y;
-	double		plane_x;	// plano da câmera
+	double		plane_x;
 	double		plane_y;
 }	t_player;
 
-typedef struct s_game {
+typedef struct s_game
+{
 	void		*mlx;
 	void		*win;
 	void		*img;
 	char		*img_data;
 	t_map		map;
 	t_player	player;
-	t_texture	textures[4];  // N, S, E, W
+	t_texture	textures[4];
 	int			bpp;
 	int			line_len;
 	int			endian;
 }	t_game;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	double	camera_x;
 	double	ray_direction_x;
 	double	ray_direction_y;
@@ -91,9 +92,9 @@ typedef struct s_ray {
 	int		step_y;
 	int		hit;
 	int		side;
-} t_ray;
-
-typedef struct s_draw_params {
+}	t_ray;
+typedef struct s_draw_params
+{
 	int		screen_column;
 	int		line_height;
 	int		draw_start;

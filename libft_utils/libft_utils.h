@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/29 00:00:00 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/05 20:16:45 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 // File reading
 char	*get_next_line(int fd);
 void	gnl_cleanup(void);
+char	*gnl_strchr(const char *s, int c);
+char	*gnl_strjoin(char *s1, char *s2);
 
 // Conversion functions
 int		ft_atoi(const char *str);

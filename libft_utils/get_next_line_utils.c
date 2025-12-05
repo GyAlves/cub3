@@ -6,13 +6,13 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 20:05:55 by galves-a          #+#    #+#             */
-/*   Updated: 2025/12/05 20:07:04 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:15:28 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_utils.h"
 
-static char	*gnl_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -27,7 +27,7 @@ static char	*gnl_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static char	*gnl_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*joined;
 	int		i;
