@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/12/06 14:37:50 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:33:03 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 		if (map->grid[i][j -1] != '1' && map->grid[i][j -1] != ' ')
 		{
 			ft_printf("Error\n");
-			return (ft_printf("%s\n", message, i, j), 0);
+			return (ft_printf("%s\n", message), 0);
 		}
 		if (map->width[i - 1] > j)
 		{
@@ -161,22 +161,34 @@ int	ft_map_sidewall(t_map *map)
  * @param map Pointer to the map structure.
  * @return 1 if valid, 0 if walls are open.
  */
-int	ft_mapwall(t_map *map)
+/*int	ft_mapwall(t_map *map)
 {
 	int		j;
 	int		height;
 	char	*message;
 	char	*botton_message;
+	int		i;
 
 	message = "Error:\ninvalid map — top wall is not closed";
 	botton_message = "Error:\ninvalid map — bottom wall is not closed";
 	j = 0;
+	i = 1;
 	height = map->height -1;
-	while (j < map->width[0])
+	while (j < map->width[0] && map->grid[0][j] != '\0')
 	{
 		if (map->grid[0][j] != '1' && map->grid[0][j]
 			!= ' ' && map->grid[0][j] != '\0')
 			return (ft_printf("%s\n", message), 0);
+		if (map->grid[i][j] == ' ')
+		{
+			while (i < map->height && map->grid[i][j] == ' ')
+				i++;
+			if (i < map->height && map->grid[i][j] != '1' 
+				&& map->grid[i][j] != '\0')
+				return (ft_printf("Error:\ninvalid map — top wall is not closed\n"), 0);
+		}
+		else if (map->grid[0][j] != '1')
+			return (ft_printf("Error:\ninvalid map — top wall is not closed\n"), 0);
 		j++;
 	}
 	j = 0;
@@ -185,7 +197,65 @@ int	ft_mapwall(t_map *map)
 		if (map->grid[height][j] != '1' && map->grid[height][j]
 			!= ' ' && map->grid[height][j] != '\0')
 			return (ft_printf("%s\n", botton_message), 0);
+		if (map->grid[height][j] == ' ')
+		{
+			while (map->grid[height] && map->grid[height][j] == ' ')
+			{
+				height--;
+				if (map->grid[height][j] != ' ' && map->grid[height][j] != '1')
+					return (ft_printf("%s\n", message), 0);
+			}
+			i = 0;
+		}
 		j++;
 	}
+	return (1);
+}*/
+
+int	ft_mapwall(t_map *map)
+{
+	int		j;
+	int		height;
+	int		i;
+
+	height = map->height - 1;
+	
+	// Verificar parede superior
+	j = 0;
+	while (j < map->width[0] && map->grid[0][j] != '\0')
+	{
+		if (map->grid[0][j] == ' ')
+		{
+			// Verificar se existe '1' abaixo antes de qualquer outro caractere
+			i = 1;
+			while (i < map->height && map->grid[i][j] == ' ')
+				i++;
+			if (i < map->height && map->grid[i][j] != '1' 
+				&& map->grid[i][j] != '\0')
+				return (ft_printf("Error:\ninvalid map — top wall is not closed\n"), 0);
+		}
+		else if (map->grid[0][j] != '1')
+			return (ft_printf("Error:\ninvalid map — top wall is not closed\n"), 0);
+		j++;
+	}
+	
+	// Verificar parede inferior
+	j = 0;
+	while (j < map->width[height] && map->grid[height][j] != '\0')
+	{
+		if (map->grid[height][j] == ' ')
+		{
+			// Verificar se existe '1' acima antes de qualquer outro caractere
+			i = height - 1;
+			while (i >= 0 && map->grid[i][j] == ' ')
+				i--;
+			if (i >= 0 && map->grid[i][j] != '1' && map->grid[i][j] != '\0')
+				return (ft_printf("Error:\ninvalid map — bottom wall is not closed\n"), 0);
+		}
+		else if (map->grid[height][j] != '1')
+			return (ft_printf("Error:\ninvalid map — bottom wall is not closed\n"), 0);
+		j++;
+	}
+	
 	return (1);
 }
