@@ -6,11 +6,12 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/12/05 19:41:21 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 10:44:26 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
 
 /**
  * @brief Removes the last line of the map if it contains only spaces.

@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/12/05 23:13:48 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 10:47:18 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ int	ft_parse_file(char *filename, t_game *game)
 		return (0);
 	if (!ft_read_map(&game->map, filename))
 		return (0);
-	//ft_debug_map(&game->map);
 	if (!ft_lexer(game))
 		return (0);
 	if (!ft_verifytexcolor(game))
@@ -144,7 +143,6 @@ int	ft_parse_file(char *filename, t_game *game)
 	ft_elimine_space(&game->map);
 	if (!ft_val_elem(&game->map))
 		return (0);
-	//ft_debug_map(&game->map);
 	if (!ft_new_window(game))
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:06:48 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/12/05 21:19:22 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 10:46:21 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,34 @@ static	int	ft_is_valid_rgbtoken(char *s)
 	return (1);
 }
 
+static char	*ft_remove_spaces(char *str, int i, int j)
+{
+	char	*result;
+	char	*trim;
+	char	*temp;
+
+	trim = ft_strtrim(str, " ");
+	if (!trim)
+		return (NULL);
+	if (trim[0] == 'F' || trim[0] == 'C')
+	{
+		temp = ft_strtrim(trim + 1, " ");
+		if (free(trim), !temp)
+			return (NULL);
+		trim = temp;
+	}
+	result = malloc(ft_strlen(trim) + 1);
+	if (!result)
+		return (free(trim), NULL);
+	while (trim[++i])
+	{
+		if (trim[i] != ' ')
+			result[j++] = trim[i];
+	}
+	result[j] = '\0';
+	free(trim);
+	return (result);
+}
 
 /**
  * @brief Validates and parses a color token from the map configuration.
@@ -79,7 +107,7 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 	int		z;
 
 	z = 0;
-	str = ft_strtrim(map->grid[i] + 1, " ");
+	str = ft_remove_spaces(map->grid[i], -1, 0);
 	if (!str)
 		return (0);
 	color = ft_split(str, ',');
@@ -95,7 +123,7 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 			return (ft_free_map(color), free(str), 0);
 	}
 	if (!ft_rgb_to_int(map, rgb, color_type))
-		return (((free(str)), (ft_free_map(color))), 0);
+		return (free(str), ft_free_map(color), 0);
 	return (free(str), ft_free_map(color), 1);
 }
 
