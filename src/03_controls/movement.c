@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/12/05 20:25:26 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/06 14:27:10 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	is_valid_position(t_game *game, double x, double y)
 		return (0);
 	if (!game->map.grid[map_y] || !game->map.grid[map_y][map_x])
 		return (0);
-	if (game->map.grid[map_y][map_x] == '1' || game->map.grid[map_y][map_x] == ' ')
+	if (game->map.grid[map_y][map_x] == '1'
+		|| game->map.grid[map_y][map_x] == ' ')
 		return (0);
 	return (1);
 }
