@@ -6,14 +6,14 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/12/06 17:00:09 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:21:57 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bola_quadrada.h"
+/*#include "bola_quadrada.h"
 #include <signal.h>
 
-	static t_game	*g_game_ptr = NULL;
+/*	static t_game	*g_game_ptr = NULL;
 
 /**
  * @brief Signal handler for SIGINT (Ctrl+C).
@@ -21,7 +21,7 @@
  *
  * @param sig Signal number (unused).
  */
-static void	handle_sigint(int sig)
+/*static void	handle_sigint(int sig)
 {
 	(void)sig;
 	if (g_game_ptr)
@@ -38,9 +38,9 @@ static void	handle_sigint(int sig)
  *
  * @param game Pointer to the game structure.
  */
-void	setup_signal_handlers(t_game *game)
+/*void	setup_signal_handlers(t_game *game)
 {
 	g_game_ptr = game;
 	signal(SIGINT, handle_sigint);
-}
+}*/
 

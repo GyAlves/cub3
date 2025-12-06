@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/12/06 13:44:04 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 18:26:11 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_ray
 	int		hit;
 	int		side;
 }	t_ray;
+
 typedef struct s_draw_params
 {
 	int		screen_column;

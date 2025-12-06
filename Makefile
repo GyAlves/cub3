@@ -22,7 +22,6 @@ SRCS = $(SRC_DIR)/03_controls/rotation.c \
        $(SRC_DIR)/main.c \
        $(SRC_DIR)/utils/pixel_utils.c \
        $(SRC_DIR)/utils/raycasting_utils.c \
-       $(SRC_DIR)/utils/signal_handler.c \
        $(SRC_DIR)/utils/raycasting_draw.c \
        $(SRC_DIR)/01_parsing/00parsing.c \
        $(SRC_DIR)/01_parsing/05_mlx.c \
