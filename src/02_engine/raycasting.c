@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 22:54:14 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/12/05 20:57:15 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/06 14:48:48 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/bola_quadrada.h"
 #include "../includes/engine.h"
 #include "../includes/utils.h"
+
+static int	check_hit_condition(t_ray *ray, t_map *map)
+{
+	if (ray->map_x < 0 || ray->map_y < 0 || ray->map_y >= map->height)
+		return (1);
+	if (ray->map_x >= map->width[ray->map_y])
+		return (1);
+	if (map->grid[ray->map_y][ray->map_x] == '1')
+		return (1);
+	if (map->grid[ray->map_y][ray->map_x] == ' ')
+		return (1);
+	return (0);
+}
 
 static void	perform_dda(t_ray *ray, t_map *map)
 {
@@ -35,14 +48,7 @@ static void	perform_dda(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_x < 0 || ray->map_y < 0 || ray->map_y >= map->height)
-			ray->hit = 1;
-		else if (ray->map_x >= map->width[ray->map_y])
-			ray->hit = 1;
-		else if (map->grid[ray->map_y][ray->map_x] == '1')
-			ray->hit = 1;
-		else if (map->grid[ray->map_y][ray->map_x] == ' ')
-			ray->hit = 1;
+		ray->hit = check_hit_condition(ray, map);
 	}
 }
 

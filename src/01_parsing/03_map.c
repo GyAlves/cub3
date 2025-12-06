@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/12/06 13:52:10 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 14:37:50 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,52 +95,11 @@ int	ft_mapposition(t_map *map, char *position)
  * @param j Column index of space.
  * @return 1 if valid, 0 if space borders invalid area.
  */
-
-/*static void	ft_debug_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("\033[1;45mEntrou no Debug_map\033[0m\n");
-	if (!map)
-	{
-		ft_printf("\033[1;41mErro: map é NULL\033[0m\n");
-		return ;
-	}
-	if (map->grid && map->grid[0])
-	{
-		while (i < map->height)
-		{
-			ft_printf("map->grid[%d] = %s\n", i, map->grid[i]);
-			i++;
-		}
-	}
-	i = 0;
-	while (i < map->height)
-	{
-		ft_printf("map->width %d= %d\n", i, map->width[i]);
-		i++;
-	}
-	if (map->height != -1)
-		ft_printf("map->height = %d\n", map->height);
-	if (map->floor_color != -1)
-		ft_printf("map->floor_color = %d\n", map->floor_color);
-	if (map->ceiling_color != -1)
-		ft_printf("map->ceiling_color = %d\n", map->ceiling_color);
-	if (map->player_x != -1)
-		ft_printf("map->player_x = %d\n", map->player_x);
-	if (map->player_y != -1)
-		ft_printf("map->player_y = %d\n", map->player_y);
-	if (map->player_dir != '\0')
-		ft_printf("map->player_dir = %c\n", map->player_dir);
-}*/
-
 static int	ft_mapemptyspace(t_map *map, int i, int j)
 {
 	char	*message;
 
 	message = "Invalid map — empty space inside playable area";
-	//ft_debug_map(map);
 	while (j < map->width[i])
 	{
 		while (map->grid[i][j] != ' ' && j < map->width[i])
@@ -150,14 +109,14 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 		if (map->grid[i][j -1] != '1' && map->grid[i][j -1] != ' ')
 		{
 			ft_printf("Error\n");
-			return (ft_printf("%s 1) i = %d, j = %d\n", message, i, j), 0);
+			return (ft_printf("%s\n", message, i, j), 0);
 		}
 		if (map->width[i - 1] > j)
 		{
 			if (map->grid[i - 1][j] != ' ' && map->grid[i - 1][j] != '1')
 			{
 				ft_printf("Error\n");
-				return (ft_printf("%s 2) i = %d, j = %d ij= %d\n", message, i, j, map->grid[i][j]), 0);
+				return (ft_printf("%s\n", message), 0);
 			}
 		}
 		j++;

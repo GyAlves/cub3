@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:00:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/11/29 00:00:00 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/12/06 17:00:09 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bola_quadrada.h"
 #include <signal.h>
 
-static t_game	*g_game_ptr = NULL;
+	static t_game	*g_game_ptr = NULL;
 
 /**
  * @brief Signal handler for SIGINT (Ctrl+C).
@@ -43,3 +43,4 @@ void	setup_signal_handlers(t_game *game)
 	g_game_ptr = game;
 	signal(SIGINT, handle_sigint);
 }
+
