@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:50:15 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:11:06 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 12:58:38 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,7 @@ int	ft_error_mem(void *ptr)
 {
 	if (ptr == NULL)
 	{
-		ft_printf("Error:\nMemory allocating");
-		exit(EXIT_FAILURE);
-	}
-	return (1);
-}
-
-/**
- * @brief Checks if double pointer allocation succeeded and exits on failure.
- * @param ptr Double pointer to check for NULL.
- * @return 1 if pointer is valid, otherwise exits the program.
- */
-int	ft_error_ptrptr(char **ptr)
-{
-	if (ptr == NULL)
-	{
-		ft_printf("Error\nMemory allocating");
+		ft_printf("Error:\nMemory allocating\n");
 		exit(EXIT_FAILURE);
 	}
 	return (1);

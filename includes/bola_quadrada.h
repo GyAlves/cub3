@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bola_quadrada.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:33:34 by galves-a          #+#    #+#             */
-/*   Updated: 2025/12/05 20:10:31 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/12/06 13:44:04 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ typedef struct s_dir_params
 }	t_dir_params;
 
 int		main(int argc, char **argv);
-void	ft_debug_map(t_map *map);
-void	ft_debug_textures(t_texture *textures);
 void	ft_free_game(t_game *game);
 
 #endif

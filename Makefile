@@ -43,7 +43,8 @@ LIBFT_UTILS_SRCS = $(LIBFT_UTILS_DIR)/ft_strncmp.c \
                    $(LIBFT_UTILS_DIR)/ft_strrchr.c \
                    $(LIBFT_UTILS_DIR)/ft_atoi.c \
                    $(LIBFT_UTILS_DIR)/ft_printf_hex.c \
-                   $(LIBFT_UTILS_DIR)/ft_printf.c
+                   $(LIBFT_UTILS_DIR)/ft_printf.c \
+                   $(LIBFT_UTILS_DIR)/ft_isdigit.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 LIBFT_UTILS_OBJS = $(patsubst $(LIBFT_UTILS_DIR)/%.c, $(OBJ_DIR)/libft_utils/%.o, $(LIBFT_UTILS_SRCS))

@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 20:19:23 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:34:42 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 12:01:30 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_process_line(t_game *game, int *i, int *j)
 		(*j)++;
 	if (*j >= game->map.width[*i])
 		return (*i = game->map.height, ft_printf(
-				"Error:Unexpected content between elements\n"), 0);
+				"Error:\nUnexpected content between elements\n"), 0);
 	while (possib_char[z] != '\0' && game->map.grid[*i][*j] != possib_char[z])
 		z++;
 	if (game->map.grid[*i][*j] == possib_char[z])
@@ -127,7 +127,7 @@ int	ft_lexer(t_game *game)
 	}
 	if (z == 0)
 	{
-		ft_printf("Error: empty map\n");
+		ft_printf("Error:\nEmpty map\n");
 		return (0);
 	}
 	game->map.height = z + 1;

@@ -6,11 +6,46 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:36:24 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 13:52:10 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+/**
+ * @brief Validates map grid contains only 
+ * valid characters (' ', 0, 1, N, S, E, W).
+ *
+ * @param map Pointer to the map structure.
+ * @return 1 if valid, 0 if invalid character found.
+ */
+int	ft_mapcontent(t_map *map)
+{
+	int		i;
+	int		j;
+	int		z;
+	char	*possib_char;
+
+	i = 0;
+	possib_char = " 01NSEW";
+	while (i < map->height)
+	{
+		if (!map->grid[i])
+			return (ft_printf("Error:\nMap line %d is NULL\n", i), 0);
+		j = 0;
+		while (map->grid[i][j] != '\0')
+		{
+			z = 0;
+			while ((z < 7) && (map->grid[i][j] != possib_char[z]))
+				z++;
+			if (possib_char[z] == '\0')
+				return (ft_printf("Error:\nUnrecognized character found\n"), 0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 /**
  * @brief Counts player start positions and records the first one found.
@@ -21,29 +56,28 @@
  * @param map Pointer to the map structure (updated with player data).
  * @return Count of player positions minus one (0 if exactly one player).
  */
-int	ft_mapposition(t_map *map)
+int	ft_mapposition(t_map *map, char *position)
 {
 	int		i;
 	int		z;
 	int		count;
-	char	*position;
 	char	*ptr;
 
 	i = -1;
 	count = -1;
-	position = "NSEW";
 	while (++i < map->height)
 	{
 		z = -1;
 		while (position[++z] != '\0')
 		{
-			ptr = ft_strrchr(map->grid[i], position[z]);
-			if (ptr)
+			ptr = ft_strchr(map->grid[i], position[z]);
+			while (ptr)
 			{
 				map->player_dir = position[z];
 				map->player_x = ptr - map->grid[i];
 				map->player_y = i;
 				count++;
+				ptr = ft_strchr(++ptr, position[z]);
 			}
 		}
 	}
@@ -61,11 +95,52 @@ int	ft_mapposition(t_map *map)
  * @param j Column index of space.
  * @return 1 if valid, 0 if space borders invalid area.
  */
+
+/*static void	ft_debug_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("\033[1;45mEntrou no Debug_map\033[0m\n");
+	if (!map)
+	{
+		ft_printf("\033[1;41mErro: map é NULL\033[0m\n");
+		return ;
+	}
+	if (map->grid && map->grid[0])
+	{
+		while (i < map->height)
+		{
+			ft_printf("map->grid[%d] = %s\n", i, map->grid[i]);
+			i++;
+		}
+	}
+	i = 0;
+	while (i < map->height)
+	{
+		ft_printf("map->width %d= %d\n", i, map->width[i]);
+		i++;
+	}
+	if (map->height != -1)
+		ft_printf("map->height = %d\n", map->height);
+	if (map->floor_color != -1)
+		ft_printf("map->floor_color = %d\n", map->floor_color);
+	if (map->ceiling_color != -1)
+		ft_printf("map->ceiling_color = %d\n", map->ceiling_color);
+	if (map->player_x != -1)
+		ft_printf("map->player_x = %d\n", map->player_x);
+	if (map->player_y != -1)
+		ft_printf("map->player_y = %d\n", map->player_y);
+	if (map->player_dir != '\0')
+		ft_printf("map->player_dir = %c\n", map->player_dir);
+}*/
+
 static int	ft_mapemptyspace(t_map *map, int i, int j)
 {
 	char	*message;
 
-	message = "Error invalid map — empty space inside playable area";
+	message = "Invalid map — empty space inside playable area";
+	//ft_debug_map(map);
 	while (j < map->width[i])
 	{
 		while (map->grid[i][j] != ' ' && j < map->width[i])
@@ -74,14 +149,18 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 			return (1);
 		if (map->grid[i][j -1] != '1' && map->grid[i][j -1] != ' ')
 		{
+			ft_printf("Error\n");
 			return (ft_printf("%s 1) i = %d, j = %d\n", message, i, j), 0);
 		}
-		if (map->width[i - 1] >= j)
+		if (map->width[i - 1] > j)
 		{
 			if (map->grid[i - 1][j] != ' ' && map->grid[i - 1][j] != '1')
-				return (ft_printf("%s 1) i = %d, j = %d\n", message, i, j), 0);
-			j++;
+			{
+				ft_printf("Error\n");
+				return (ft_printf("%s 2) i = %d, j = %d ij= %d\n", message, i, j, map->grid[i][j]), 0);
+			}
 		}
+		j++;
 	}
 	return (1);
 }
@@ -109,7 +188,7 @@ int	ft_map_sidewall(t_map *map)
 			j++;
 		width = map->width[i] - 1;
 		if (map->grid[i][j] != '1' || map->grid[i][width] != '1')
-			return (ft_printf("Error: side wall not closed %d, %d\n", i, j), 0);
+			return (ft_printf("Error:\nSide wall not closed\n"), 0);
 		if (!ft_mapemptyspace(map, i, j))
 			return (0);
 		i++;
@@ -123,15 +202,15 @@ int	ft_map_sidewall(t_map *map)
  * @param map Pointer to the map structure.
  * @return 1 if valid, 0 if walls are open.
  */
-int	ft_mapwall1(t_map *map)
+int	ft_mapwall(t_map *map)
 {
 	int		j;
 	int		height;
 	char	*message;
 	char	*botton_message;
 
-	message = "Error: invalid map — top wall is not closed";
-	botton_message = "Error: invalid map — bottom wall is not closed";
+	message = "Error:\ninvalid map — top wall is not closed";
+	botton_message = "Error:\ninvalid map — bottom wall is not closed";
 	j = 0;
 	height = map->height -1;
 	while (j < map->width[0])

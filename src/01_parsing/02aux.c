@@ -6,11 +6,40 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:35:52 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/06 13:00:25 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+char	*ft_remove_spaces(char *str, int i, int j)
+{
+	char	*result;
+	char	*trim;
+	char	*temp;
+
+	trim = ft_strtrim(str, " ");
+	if (!trim)
+		return (NULL);
+	if (trim[0] == 'F' || trim[0] == 'C')
+	{
+		temp = ft_strtrim(trim + 1, " ");
+		if (free(trim), !temp)
+			return (NULL);
+		trim = temp;
+	}
+	result = malloc(ft_strlen(trim) + 1);
+	if (!result)
+		return (free(trim), NULL);
+	while (trim[++i])
+	{
+		if (trim[i] != ' ')
+			result[j++] = trim[i];
+	}
+	result[j] = '\0';
+	free(trim);
+	return (result);
+}
 
 /**
  * @brief Removes the last line of the map if it contains only spaces.
@@ -61,41 +90,6 @@ void	ft_trim_trailing_spaces(t_map *map)
 }
 
 /**
- * @brief Validates map grid contains only 
- * valid characters (' ', 0, 1, N, S, E, W).
- *
- * @param map Pointer to the map structure.
- * @return 1 if valid, 0 if invalid character found.
- */
-int	ft_mapcontent(t_map *map)
-{
-	int		i;
-	int		j;
-	int		z;
-	char	*possib_char;
-
-	i = 0;
-	possib_char = " 01NSEW";
-	while (i < map->height)
-	{	
-		if (!map->grid[i])
-			return (ft_printf("Error: map line %d is NULL\n", i), 0);
-		j = 0;
-		while (map->grid[i][j] != '\0')
-		{
-			z = 0;
-			while ((z < 7) && (map->grid[i][j] != possib_char[z]))
-				z++;
-			if (possib_char[z] == '\0')
-				return (ft_printf("Error: unrecognized character found\n"), 0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-/**
  * @brief Count the number of lines in a file and store it in struct
  *
  * @param map Pointer to the map structure where the height will be stored.
@@ -123,9 +117,27 @@ int	ft_count_map_lines(t_map *map, char *filename)
 	gnl_cleanup();
 	if (count == 0)
 	{
-		ft_printf("Error: map incomplete\n");
+		ft_printf("Error:\nMap incomplete\n");
 		return (0);
 	}
 	map->height = count;
+	return (1);
+}
+
+int	ft_read_grid_lines(t_map *map, int fd)
+{
+	int	i;
+
+	i = 0;
+	map->grid[i] = get_next_line(fd);
+	while (map->grid[i] != NULL)
+	{
+		if (map->grid[i][ft_strlen(map->grid[i]) - 1] == '\n')
+			map->grid[i][ft_strlen(map->grid[i]) - 1] = '\0';
+		map->width[i] = ft_strlen(map->grid[i]);
+		i++;
+		map->grid[i] = get_next_line(fd);
+	}
+	map->grid[i] = NULL;
 	return (1);
 }
