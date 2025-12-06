@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 16:41:55 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:35:52 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 19:41:21 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int	ft_mapcontent(t_map *map)
 	i = 0;
 	possib_char = " 01NSEW";
 	while (i < map->height)
-	{	
+	{
 		if (!map->grid[i])
-			return (ft_printf("Error: map line %d is NULL\n", i), 0);
+			return (ft_printf("Error:\nMap line %d is NULL\n", i), 0);
 		j = 0;
 		while (map->grid[i][j] != '\0')
 		{
@@ -87,7 +87,7 @@ int	ft_mapcontent(t_map *map)
 			while ((z < 7) && (map->grid[i][j] != possib_char[z]))
 				z++;
 			if (possib_char[z] == '\0')
-				return (ft_printf("Error: unrecognized character found\n"), 0);
+				return (ft_printf("Error:\nUnrecognized character found\n"), 0);
 			j++;
 		}
 		i++;
@@ -123,7 +123,7 @@ int	ft_count_map_lines(t_map *map, char *filename)
 	gnl_cleanup();
 	if (count == 0)
 	{
-		ft_printf("Error: map incomplete\n");
+		ft_printf("Error:\nMap incomplete\n");
 		return (0);
 	}
 	map->height = count;

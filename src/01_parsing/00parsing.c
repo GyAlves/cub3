@@ -6,11 +6,33 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:38:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/10/30 22:31:25 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:52:49 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+/**
+ * @brief Verifies if all textures and colors are properly loaded.
+ * @param game Pointer to the game structure.
+ * @return 1 if all textures and colors are valid, 0 otherwise.
+ */
+int	ft_verifytexcolor(t_game *game)
+{
+	int	j;
+
+	j = 0;
+	while (j < 4)
+	{
+		if (game->textures[j].addr == NULL)
+			return (ft_printf("Error:\nMap texture\n"), 0);
+		j++;
+	}
+	j = 0;
+	if (game->map.ceiling_color == -1 || game->map.floor_color == -1)
+		return (ft_printf("Error:\nMap color\n"), 0);
+	return (1);
+}
 
 /**
  * @brief Validates map content, walls, and boundaries.
@@ -31,9 +53,9 @@ int	ft_val_elem(t_map *map)
 		return (0);
 	player = ft_mapposition(map);
 	if (player < 0)
-		return (ft_printf("Error: No player in the map\n"), 0);
+		return (ft_printf("Error:\nNo player in the map\n"), 0);
 	if (player > 0)
-		return (ft_printf("Error: %d players in the map\n", player + 1), 0);
+		return (ft_printf("Error:\n%d players in the map\n", player + 1), 0);
 	return (1);
 }
 
@@ -91,7 +113,7 @@ int	ft_val_extension(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error opening file");
+		perror("Error:\nFile open failed\n");
 		return (0);
 	}
 	close(fd);

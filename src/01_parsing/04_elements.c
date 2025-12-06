@@ -6,33 +6,11 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:06:48 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:41:28 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 21:08:01 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-/**
- * @brief Verifies if all textures and colors are properly loaded.
- * @param game Pointer to the game structure.
- * @return 1 if all textures and colors are valid, 0 otherwise.
- */
-int	ft_verifytexcolor(t_game *game)
-{
-	int	j;
-
-	j = 0;
-	while (j < 4)
-	{
-		if (game->textures[j].addr == NULL)
-			return (ft_printf("Error: Map texture incomplete %d\n", j), 0);
-		j++;
-	}
-	j = 0;
-	if (game->map.ceiling_color == -1 || game->map.floor_color == -1)
-		return (ft_printf("Error: Map color incomplete\n"), 0);
-	return (1);
-}
 
 /**
  * @brief Converts RGB values to a single 
@@ -49,7 +27,7 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 	{
 		if (map->floor_color != -1)
 		{
-			printf("Error: Map with repeated floor color\n");
+			printf("Error:\nMap with repeated floor color\n");
 			return (0);
 		}
 		return ((map->floor_color = (rgb[0] << 16)
@@ -59,7 +37,7 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 	{
 		if (map->ceiling_color != -1)
 		{
-			printf("Error: Map with repeated ceiling color\n");
+			printf("Error:\nMap with repeated ceiling color\n");
 			return (0);
 		}
 		return ((map->ceiling_color = (rgb[0] << 16)
@@ -70,6 +48,21 @@ int	ft_rgb_to_int(t_map *map, int *rgb, char color_type)
 		return (0);
 	return (0);
 }
+
+static	int	ft_is_valid_rgbtoken(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+	{
+		if (!ft_isdigit(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 
 /**
  * @brief Validates and parses a color token from the map configuration.
@@ -92,18 +85,17 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 	color = ft_split(str, ',');
 	if (!color)
 		return (free(str), 0);
-	while (color[z])
-		z++;
-	if (z != 3)
+	if (!color[0] || !color[1] || !color[2] || color[3])
 		return (ft_free_map(color), free(str), 0);
 	z = -1;
 	while (++z < 3)
 	{
 		rgb[z] = ft_atoi(color[z]);
-		if (rgb[z] < 0 || rgb[z] > 255)
+		if (!ft_is_valid_rgbtoken(color[z]) || rgb[z] < 0 || rgb[z] > 255)
 			return (ft_free_map(color), free(str), 0);
 	}
-	ft_rgb_to_int(map, rgb, color_type);
+	if (!ft_rgb_to_int(map, rgb, color_type))
+		return (((free(str)), (ft_free_map(color))), 0);
 	return (free(str), ft_free_map(color), 1);
 }
 
@@ -118,10 +110,14 @@ int	ft_valid_colortoken(t_map *map, int i, char color_type)
 int	ft_valid_textoken(t_game *game, int i, int j, int tex_type)
 {
 	int		len;
+	int		end_space;
 
 	while (game->map.grid[i][j] == ' ')
 		j++;
-	len = game->map.width[i] - j;
+	end_space = game->map.width[i] - 1;
+	while (game->map.grid[i][end_space] == ' ')
+		end_space--;
+	len = (end_space - j) + 1;
 	if (game->textures[tex_type].addr != NULL)
 	{
 		printf("Error: Map with repeated texture\n");

@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/10/30 22:36:24 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 20:53:05 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 {
 	char	*message;
 
-	message = "Error invalid map — empty space inside playable area";
+	message = "Invalid map — empty space inside playable area";
 	while (j < map->width[i])
 	{
 		while (map->grid[i][j] != ' ' && j < map->width[i])
@@ -74,12 +74,16 @@ static int	ft_mapemptyspace(t_map *map, int i, int j)
 			return (1);
 		if (map->grid[i][j -1] != '1' && map->grid[i][j -1] != ' ')
 		{
+			ft_printf("Error\n");
 			return (ft_printf("%s 1) i = %d, j = %d\n", message, i, j), 0);
 		}
 		if (map->width[i - 1] >= j)
 		{
 			if (map->grid[i - 1][j] != ' ' && map->grid[i - 1][j] != '1')
+			{
+				ft_printf("Error\n");
 				return (ft_printf("%s 1) i = %d, j = %d\n", message, i, j), 0);
+			}
 			j++;
 		}
 	}
@@ -109,7 +113,7 @@ int	ft_map_sidewall(t_map *map)
 			j++;
 		width = map->width[i] - 1;
 		if (map->grid[i][j] != '1' || map->grid[i][width] != '1')
-			return (ft_printf("Error: side wall not closed %d, %d\n", i, j), 0);
+			return (ft_printf("Error:\nSide wall not closed %d, %d\n"), 0);
 		if (!ft_mapemptyspace(map, i, j))
 			return (0);
 		i++;
@@ -130,8 +134,8 @@ int	ft_mapwall1(t_map *map)
 	char	*message;
 	char	*botton_message;
 
-	message = "Error: invalid map — top wall is not closed";
-	botton_message = "Error: invalid map — bottom wall is not closed";
+	message = "Error:\ninvalid map — top wall is not closed";
+	botton_message = "Error:\ninvalid map — bottom wall is not closed";
 	j = 0;
 	height = map->height -1;
 	while (j < map->width[0])

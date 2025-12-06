@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || !argv[1])
 	{
-		ft_printf("Error: Invalid number of arguments.\n");
+		ft_printf("Error:\nInvalid number of arguments.\n");
 		return (1);
 	}
 	ft_init_game(&game);
@@ -101,7 +101,7 @@ int	main(int argc, char **argv)
 	}
 	if (init_engine(&game) != 0)
 	{
-		ft_printf("Error: Failed to initialize engine.\n");
+		ft_printf("Error:\nFailed to initialize engine.\n");
 		ft_free_game(&game);
 		return (1);
 	}
