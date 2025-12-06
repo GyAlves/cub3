@@ -6,7 +6,7 @@
 /*   By: jucoelho <juliacoelhobrandao@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:38:02 by jucoelho          #+#    #+#             */
-/*   Updated: 2025/12/05 21:11:13 by jucoelho         ###   ########.fr       */
+/*   Updated: 2025/12/05 23:13:17 by jucoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,28 @@
  * @param map Pointer to the map structure (updated with player data).
  * @return Count of player positions minus one (0 if exactly one player).
  */
-int	ft_mapposition(t_map *map)
+int	ft_mapposition(t_map *map, char *position)
 {
 	int		i;
 	int		z;
 	int		count;
-	char	*position;
 	char	*ptr;
 
 	i = -1;
 	count = -1;
-	position = "NSEW";
 	while (++i < map->height)
 	{
 		z = -1;
 		while (position[++z] != '\0')
 		{
-			ptr = ft_strrchr(map->grid[i], position[z]);
-			if (ptr)
+			ptr = ft_strchr(map->grid[i], position[z]);
+			while (ptr)
 			{
 				map->player_dir = position[z];
 				map->player_x = ptr - map->grid[i];
 				map->player_y = i;
 				count++;
+				ptr = ft_strchr(++ptr, position[z]);
 			}
 		}
 	}
